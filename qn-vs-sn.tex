@@ -1,0 +1,183 @@
+\documentclass{patmorin}
+\listfiles
+\usepackage{pat}
+\usepackage{paralist}
+\usepackage{dsfont}  % for \mathds{A}
+\usepackage[utf8x]{inputenc}
+\usepackage{skull}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage[noend]{algorithmic}
+
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\usepackage{enumitem}
+
+\usepackage{todonotes}
+
+\usepackage[longnamesfirst,numbers,sort&compress]{natbib}
+
+\usepackage[mathlines]{lineno}
+\setlength{\linenumbersep}{2em}
+% \linenumbers
+% \rightlinenumbers
+% \linenumbers
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+ \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+ \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+ \renewenvironment{#1}%
+    {\linenomath\csname old#1\endcsname}%
+    {\csname oldend#1\endcsname\endlinenomath}}%
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+ \patchAmsMathEnvironmentForLineno{#1}%
+ \patchAmsMathEnvironmentForLineno{#1*}}%
+\AtBeginDocument{%
+\patchBothAmsMathEnvironmentsForLineno{equation}%
+\patchBothAmsMathEnvironmentsForLineno{align}%
+\patchBothAmsMathEnvironmentsForLineno{flalign}%
+\patchBothAmsMathEnvironmentsForLineno{alignat}%
+\patchBothAmsMathEnvironmentsForLineno{gather}%
+\patchBothAmsMathEnvironmentsForLineno{multline}%
+}
+
+
+\newcommand{\coloured}[2]{{\color{#1}{#2}}}
+\newenvironment{colourblock}[1]{\color{#1}}{}
+
+\newcommand{\condref}[1]{(C\ref{#1})}
+
+% Taken from
+% https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+\setlength{\parskip}{1ex}
+
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\tw}{tw}
+\DeclareMathOperator{\gm}{gm}
+\DeclareMathOperator{\gs}{gs}
+\DeclareMathOperator{\stw}{stw}
+\DeclareMathOperator{\ltw}{ltw}
+\DeclareMathOperator{\pw}{pw}
+\DeclareMathOperator{\lpw}{lpw}
+\DeclareMathOperator{\lhptw}{lhp-tw}
+\DeclareMathOperator{\lhppw}{lhp-pw}
+
+\DeclareMathOperator{\x}{x}
+\DeclareMathOperator{\depth}{d}
+\DeclareMathOperator{\sh}{cbt}
+\DeclareMathOperator{\cbt}{cbt}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\dc}{dc}
+\DeclareMathOperator{\afci}{\overline{\chi}_\pi}
+\DeclareMathOperator{\afcn}{\dot{\chi}_\pi}
+
+\newcommand{\ellt}{{\lfloor\ell/2\rfloor}}
+
+\title{\MakeUppercase{Notes on Subquadratic Grid Minors}\thanks{This research was partly funded by NSERC.}}
+\author{Vida Dujmović%
+    \thanks{Department of Computer Science and Electrical Engineering, University of Ottawa}\qquad
+    Pat Morin%
+    \thanks{School of Computer Science, Carleton University}}
+
+\date{}
+
+\DeclareMathOperator{\ddiv}{div}
+\DeclareMathOperator{\hist}{h}
+
+\newcommand{\colored}[2]{{\color{#1}#2}}
+
+\usepackage{tabularx}
+
+\DeclareMathOperator{\ci}{\overline{\pi}}
+
+\begin{document}
+
+% \begin{titlepage}
+\maketitle
+
+\begin{abstract}
+    These are some notes I'm keeping on trying to show that subgraphs of $H\boxtimes P$ have the subquadratic grid minor property.
+\end{abstract}
+% \end{titlepage}
+
+% \pagenumbering{roman}
+% \tableofcontents
+%
+% \newpage
+% \pagenumbering{arabic}
+
+
+
+\section{Introduction}
+
+Let $\boxplus_g$ denote the $g\times g$ grid graph.
+For a graph $G$, let $\tw(G)$ denote the treewidth of $G$ and let $\gm(G)$ denote the largest value $g$ such that $G$ contains a $\boxplus_g$ minor.
+A family of graphs $\mathcal{G}$ has the \emph{subquadratic grid minor property (SQGM) property} if there exists a constant $\alpha =\alpha(\mathcal{G}) > 1/2$ such that $\gm(G)\in\Omega(\tw(G)^{\alpha})$ for every $G\in\mathcal{G}$.  (Equivalently, $\tw(G)\in O(\gm(G)^{1/\alpha})$.
+
+% A family of graphs $\mathcal{G}$ has the \emph{subquadratic grid minor property (SQGM)} if there exists constants $\alpha, c$, $\alpha >0$, $1\le c< 2$ such that, for any $t>0$ any graph $G\in\mathcal{G}$ that does not have a $t\times t$ grid minor has treewidth at most $\alpha t^c$.  Equivalently, any $G\in\mathcal{G}$ contains an $\Omega(\tw(G)^{1/c})\times \Omega(\tw(G)^{1/c})$ grid minor.
+
+Every planar graph $G$ contains an $\Omega(\tw(G))\times\Omega(\tw(G))$ grid minor, so $\gm(G)\in\Omega(\tw(G))$, so the family of planar graphs has the SQGM Property (with $\alpha=1$).
+
+We are interested in the class $\mathcal{G}_a$ of graphs that contains every graph $G$ that is a subgraph of $H\boxtimes P$ for some graph $H$ of treewidth at most $a$ and some path $P$.  Does this class of graphs have the SQGM property?
+
+\subsection{The Product Family}
+
+Before considering subgraphs, maybe first we should consider the product family $\mathcal{G}^*:=\{H\boxtimes P:\text{$\tw(H)\le a$ and $P$ is a path}\}$.  Let $\gs(G)$ be the maximum value $g$ such that $G$ contains a subdivision of a $g\times g$ grid.  Clearly $\gm(G)\ge\gs(G)$.  Here is a result that seems relevant:
+
+\begin{lem}\label{star_times_path}
+    Let $P$ be a path of length $n^2-n+1$, let $H$ be a graph, and let $x_1,\ldots,x_n$ be a sequence of distinct vertices in $H$ such that, for each $i\in\{1,\ldots,n-1\}$, $H$ contains a path $P_{i}$ from $x_i$ to $x_{i+1}$ that does not contain any vertex of $\{x_1,\ldots,x_n\}$ in its interior.  Then $\gs(H\boxtimes P)\ge n$.
+\end{lem}
+
+\begin{proof}
+    Let $G=H\boxtimes P$ and let $P:=y_1,\ldots,y_{n^2-n+1}$.  Our goal is to find a subdivision of $\boxplus_n$ inside of $G$.  To do this, The vertex $(i,j)\in\boxplus_n$ will map to the vertex $v_{i,j}:=(x_i,y_{i+(j-1)n})\in V(G)$.  For each $i\in\{1,\ldots,n\}$, the path $(i,1),(i,2),\ldots,(i,n)$ in $\boxplus_n$ will map to the subpath of $(x_i,y_1),\ldots,(x_i,y_{n^2-n+1})$ that begins at $v_{i,1}$ and ends at $v_{i,n}$.
+
+    Now consider some edge $(i,j)(i+1,j)$ of $\boxplus_n$ and let $P_i:=w_{i,0},\ldots,w_{i,d_i}$ be a path in $G$ from $w_{i,0}:=x_i$ to $w_{i,d_i}:=x_{i+1}$ that avoids $\{x_1,\ldots,x_n\}$.  Then the horizontal edge $(i,j)(i+1,j)$ maps onto the path
+    \[
+        (v_{i,0},y_{i+(j-1)n})(v_{i,1},y_{i+1+(j-1)n}),\ldots,(v_{i,d_i},y_{i+1+(j-1)n}) \enspace .
+    \]
+    where $v_0,\ldots,v_d$ is any path in $G$ from $x_{i}$ to $x_{i+1}$.
+\end{proof}
+
+Of course, \cref{star_times_path} doesn't mean much, since $\tw(H\boxtimes P)\le |H| \le n$ in this case.  This lemma did surprise me, though, because the condition on $H$ is satisfied even when $H$ is a star with leaves $x_1,\ldots,x_n$.  In fact, it's satisfied when $H$ is any tree with $n$ leaves.  Actually, if we take any connected graph $H$ with $n$ vertices and take any spanning tree $T$ of $H$, we get a tree that has at least $\sqrt{n}$ leaves or that has a path of length at least $\sqrt{n}$.  This gives the following corollary:
+
+\begin{lem}\label{graph_times_path}
+  Let $H$ be any connected graph with $n$ vertices and let $P$ be a path of length $n$.  Then $\gs(H\boxtimes P)\ge \sqrt{n}$.
+\end{lem}
+
+So \cref{star_times_path} implies that $\gm(H\boxtimes P)\ge\gs(H\boxtimes P)\ge\sqrt{\tw(H\boxtimes P)}$.  To get the subquadratic grid minor property we would only have to squeeze  an extra $\epsilon$ out of this argument.  Where could we squeeze out this extra $\epsilon$?  There is an asymmetry between the two cases in \cref{graph_times_path}:  If $H$ contains a path of length $\ell$, then $H\boxtimes P_\ell$ contains $\boxplus_\ell$ as a subgraph, so $\gs(H\boxtimes P_\ell)\ge \ell$.  On the other hand, if $H$ is a star with $\ell$ leaves, then \cref{graph_times_path} only implies that $\gs(H\boxtimes P_\ell)\ge \sqrt{\ell}$.  Is \cref{graph_times_path} tight in the second case?  Yes:
+
+\begin{lem}\label{star_times_path_tightness}
+    For any star $S$ and any path $P$ with $\ell$ vertices, $\gm(S\boxtimes P)\le 2\sqrt{\ell}$.
+\end{lem}
+
+\begin{proof}
+    Let $G:=S\boxtimes P$ and suppose that $G$ contains a $\boxplus_k$ grid minor.  Let $\mathcal{M}:=(X_x:x\in V(\boxplus_k))$ be the model of $\boxplus_k$ in $G$.  Let $r$ denote the root of $S$.  We say that a piece $X_x$ is \emph{rooty} if $(r,y)\in V(X_x)$ for some $y\in V(P)$ and \emph{rootless} otherwise.  Clearly, the number of rooty parts in $\mathcal{M}$ is at most $\ell$.
+
+    Each rootless part in $\mathcal{M}$ is adjacent to at most two other rootless parts.  However, each part of $\mathcal{M}$ is adjacent to at least three other parts, so each rootless part is adjacent to at least one rooty part.  Each rooty part can account for at most $4$ of these adjacencies, so $k^2 \le 4\ell$, proving the result.\footnote{We could actually prove a bound of $\sqrt{2\ell}$ by using the fact that most rootless parts need to be adjacent to $2$ rooty parts.}
+\end{proof}
+
+Again, \cref{star_times_path_tightness} doesn't prove or disprove anything, unless we can show that $\tw(S\boxtimes P)\in \Omega(\ell)$.  I suspect that this is indeed the case, so let's try to prove it.
+
+\begin{lem}
+    For any star $S$ with $n$ leaves and any path $P$ with $n$ vertices, $\gm(S\boxtimes P)\in\Omega(\ell)$.
+\end{lem}
+
+\begin{proof}
+    Let $G:=S\boxtimes P$ and suppose that $\tw(G)=k\in o(n)$.  Let $P:=y_1,\ldots,y_n$, let $x_0$ be the root of $S$ and let $x_1,\ldots,x_n$ be the leaves of $S$. Since $\tw(G)=k$, there exists a separator $X\subset V(G)$ of size $k+1$ such that $G-S$ has no component of size greater than $2|V(G)|/3=2n(n+1)/3$.  Let $X_S:=\{x:(x,y)\in X,\, x\in\{1,\ldots,n\}\}$.  Consider the subgraph $G':=G-X_S$, which has $|V(G')|\ge n(n+1)-nk \in n(n+1)-o(n^2)$ vertices.  The separator $X$ must also be a separator of $G'$ in the sense that $G-X$ has no component of size greater than $2|V(G)|/3$.  
+
+
+\end{proof}
+
+
+
+% Alternatively, if $G$ has treewidth at least $\alpha t^c$ ($k$) then $G$ contains a $t\times t$ grid minor.
+
+
+\bibliographystyle{plainurlnat}
+\bibliography{af2t}
+
+
+\end{document}
