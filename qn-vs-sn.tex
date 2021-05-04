@@ -143,10 +143,26 @@ Here's a very rough intuition about the diameter (for $k=1$).  Since the height 
 Here's another approach for the diameter in the case $k=1$.  With high probability, the tree $T$ contains a root-to-leaf path $P$ of length $\Omega(\sqrt{n})$.  With high probablity, $P$ contains $\Omega(\sqrt{n})$ \emph{alternations}; subpaths of the form $xyz$ where $y$ is the right child of $x$ and $z$ is the left child of $y$ (or \emph{vice-versa} with the roles of left and right reversed).  This means there exists a vertex $v$ of $R_1$ such that $\{v_1,v_n\}$ is separated from $v$ by a sequence $\{a_1,b_1\},\ldots,\{a_k,b_k\}$ of disjoint $2$-vertex cutsets, where $k\in\Omega(\sqrt{n})$.  So every path from $v_1$ to $v$ must contain at least one of $a_i$ or $b_i$ for each $i\in\{1,\ldots,k\}$.  Therefore, $\diam(G)\ge k+1\in \Omega(\sqrt{n})$.
 
 Both of the preceding arguments seems to break down immediately, even for $k=2$.  Note that understanding diameter is a prerequisite for understanding treewidth since (at least for $k=2$) $\tw(R_2) \in O(\diam(R_2))$ since $R_2$ is planar.
-% In fact, upon reflection, I think that $\diam(R_2)\in O(\log n)$.  
+% In fact, upon reflection, I think that $\diam(R_2)\in O(\log n)$.
+
+
+\subsection{Another Candidate}
+
+Another candidate graph is the following: $G_1\cup G_2$ form an $n\times n$ grid.  (This has a realization as a 2-page graph where $v_1,\ldots,v_n$ is the snake-like path through the rows of the grid, $G_1$ contains the vertical grid edges from row $i$ to row $i+1$ for odd $i$, and $G_2$ contains the remaining vertical grid edges.)  The graph $G_3$ is the random graph $R_1$ described above.
+
+First we'd like to see if the treewidth of this graph is large.  We might try to do this as follows:
+\begin{comopactenum}
+    \item Fix a separation $(A,B)$ of $G_1\cup G_2$ of order $O(\sqrt{n})$.
+    \item This separation divides $v_1,\ldots,v_n$ into $O(sqrt(n))$ intervals.  Some of these are in $A\setminus B$ and some of these are in $B\setminus A$.
+    \item The
+
+
+The idea to do this would be to check the following:
 
 
 
+
+The idea here is that
 
 
 
