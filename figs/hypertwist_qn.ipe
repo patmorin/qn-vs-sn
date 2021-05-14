@@ -1,0 +1,1079 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipe SYSTEM "ipe.dtd">
+<ipe version="70218" creator="ipetoipe 7.2.21">
+<info created="D:20210513050442" modified="D:20210514035221"/>
+<ipestyle name="basic">
+<symbol name="arrow/arc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/farc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/ptarc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fptarc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="mark/circle(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</symbol>
+<symbol name="mark/disk(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+</path>
+</symbol>
+<symbol name="mark/fdisk(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+0.5 0 0 0.5 0 0 e
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</group>
+</symbol>
+<symbol name="mark/box(sx)" transformations="translations">
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</symbol>
+<symbol name="mark/square(sx)" transformations="translations">
+<path fill="sym-stroke">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+</path>
+</symbol>
+<symbol name="mark/fsquare(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+-0.5 -0.5 m
+0.5 -0.5 l
+0.5 0.5 l
+-0.5 0.5 l
+h
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="mark/cross(sx)" transformations="translations">
+<group>
+<path fill="sym-stroke">
+-0.43 -0.57 m
+0.57 0.43 l
+0.43 0.57 l
+-0.57 -0.43 l
+h
+</path>
+<path fill="sym-stroke">
+-0.43 0.57 m
+0.57 -0.43 l
+0.43 -0.57 l
+-0.57 0.43 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="arrow/fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/linear(spx)">
+<path stroke="sym-stroke" pen="sym-pen">
+-1 0.333 m
+0 0 l
+-1 -0.333 l
+</path>
+</symbol>
+<symbol name="arrow/fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-normal(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.3 0 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.3 0 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+1 0 m
+0 0.333 l
+0 -0.333 l
+h
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+1 0 m
+0 0.333 l
+0 -0.333 l
+h
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<pen name="heavier" value="0.8"/>
+<pen name="fat" value="1.2"/>
+<pen name="ultrafat" value="2"/>
+<symbolsize name="large" value="5"/>
+<symbolsize name="small" value="2"/>
+<symbolsize name="tiny" value="1.1"/>
+<arrowsize name="large" value="10"/>
+<arrowsize name="small" value="5"/>
+<arrowsize name="tiny" value="3"/>
+<color name="red" value="1 0 0"/>
+<color name="blue" value="0 0 1"/>
+<color name="green" value="0 1 0"/>
+<color name="yellow" value="1 1 0"/>
+<color name="orange" value="1 0.647 0"/>
+<color name="gold" value="1 0.843 0"/>
+<color name="purple" value="0.627 0.125 0.941"/>
+<color name="gray" value="0.745"/>
+<color name="brown" value="0.647 0.165 0.165"/>
+<color name="navy" value="0 0 0.502"/>
+<color name="pink" value="1 0.753 0.796"/>
+<color name="seagreen" value="0.18 0.545 0.341"/>
+<color name="turquoise" value="0.251 0.878 0.816"/>
+<color name="violet" value="0.933 0.51 0.933"/>
+<color name="darkblue" value="0 0 0.545"/>
+<color name="darkcyan" value="0 0.545 0.545"/>
+<color name="darkgray" value="0.663"/>
+<color name="darkgreen" value="0 0.392 0"/>
+<color name="darkmagenta" value="0.545 0 0.545"/>
+<color name="darkorange" value="1 0.549 0"/>
+<color name="darkred" value="0.545 0 0"/>
+<color name="lightblue" value="0.678 0.847 0.902"/>
+<color name="lightcyan" value="0.878 1 1"/>
+<color name="lightgray" value="0.827"/>
+<color name="lightgreen" value="0.565 0.933 0.565"/>
+<color name="lightyellow" value="1 1 0.878"/>
+<dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dashed" value="[4] 0"/>
+<dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
+<dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
+<textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
+<textsize name="Large" value="\Large"/>
+<textsize name="LARGE" value="\LARGE"/>
+<textsize name="huge" value="\huge"/>
+<textsize name="Huge" value="\Huge"/>
+<textsize name="footnote" value="\footnotesize"/>
+<textstyle name="center" begin="\begin{center}" end="\end{center}"/>
+<textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
+<textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
+<gridsize name="4 pts" value="4"/>
+<gridsize name="8 pts (~3 mm)" value="8"/>
+<gridsize name="16 pts (~6 mm)" value="16"/>
+<gridsize name="32 pts (~12 mm)" value="32"/>
+<gridsize name="10 pts (~3.5 mm)" value="10"/>
+<gridsize name="20 pts (~7 mm)" value="20"/>
+<gridsize name="14 pts (~5 mm)" value="14"/>
+<gridsize name="28 pts (~10 mm)" value="28"/>
+<gridsize name="56 pts (~20 mm)" value="56"/>
+<anglesize name="90 deg" value="90"/>
+<anglesize name="60 deg" value="60"/>
+<anglesize name="45 deg" value="45"/>
+<anglesize name="30 deg" value="30"/>
+<anglesize name="22.5 deg" value="22.5"/>
+<opacity name="10%" value="0.1"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="75%" value="0.75"/>
+<tiling name="falling" angle="-60" step="4" width="1"/>
+<tiling name="rising" angle="30" step="4" width="1"/>
+</ipestyle>
+<ipestyle name="brew">
+<pen name="fattyfatfat" value="4"/>
+<color name="aliceblue" value="0.941 0.973 1"/>
+<color name="brew1" value="0.552 0.827 0.78"/>
+<color name="brew2" value="1 1 0.701"/>
+<color name="brew3" value="0.745 0.729 0.854"/>
+<color name="brew4" value="0.984 0.501 0.447"/>
+<color name="brew5" value="0.501 0.694 0.827"/>
+<color name="brew6" value="0.992 0.705 0.384"/>
+<color name="brew7" value="0.701 0.87 0.411"/>
+<color name="brew8" value="0.988 0.803 0.898"/>
+</ipestyle>
+<page>
+<layer name="vertices"/>
+<layer name="one"/>
+<layer name="two"/>
+<layer name="three"/>
+<layer name="alpha"/>
+<view layers="one" active="one"/>
+<view layers="one two" active="two"/>
+<view layers="vertices one two three" active="three"/>
+<view layers="vertices one two three alpha" active="alpha"/>
+<path layer="two" matrix="1 0 0 1 8 0" fill="brew7">
+300 728 m
+300 712 l
+372 712 l
+372 728 l
+h
+</path>
+<path matrix="1 0 0 1 8 0" fill="brew2">
+228 728 m
+228 712 l
+300 712 l
+300 728 l
+h
+</path>
+<path matrix="1 0 0 1 8 0" fill="brew8">
+156 728 m
+156 712 l
+228 712 l
+228 728 l
+h
+</path>
+<path matrix="1 0 0 1 -39.8 0" fill="brew7">
+380 520 m
+380 504 l
+500 504 l
+500 520 l
+h
+</path>
+<path matrix="1 0 0 1 -39.8 0" fill="brew2">
+252 520 m
+252 504 l
+372 504 l
+372 520 l
+h
+</path>
+<path matrix="1 0 0 1 -39.8 0" fill="brew8">
+124 520 m
+124 504 l
+244 504 l
+244 520 l
+h
+</path>
+<path layer="one" matrix="1 0 0 1 32 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path layer="two" matrix="1 0 0 1 32 0" stroke="brew7" pen="heavier">
+184 720 m
+4 0 0 4 180 720 176 720 a
+</path>
+<path matrix="1 0 0 1 32 0" stroke="brew7" pen="heavier">
+192 720 m
+12 0 0 12 180 720 168 720 a
+</path>
+<path matrix="1 0 0 1 32 0" stroke="brew7" pen="heavier">
+200 720 m
+20 0 0 20 180 720 160 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew7" pen="heavier">
+184 720 m
+4 0 0 4 180 720 176 720 a
+</path>
+<path layer="one" matrix="1 0 0 1 8 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 56 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 56 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 56 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path layer="two" matrix="1 0 0 1 8 0" stroke="brew7" pen="heavier">
+192 720 m
+12 0 0 12 180 720 168 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew7" pen="heavier">
+200 720 m
+20 0 0 20 180 720 160 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew7" pen="heavier">
+176 720 m
+16 0 0 16 192 720 208 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew7" pen="heavier">
+168 720 m
+24 0 0 24 192 720 216 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew7" pen="heavier">
+160 720 m
+32 0 0 32 192 720 224 720 a
+</path>
+<path layer="one" matrix="1 0 0 1 104 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 104 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 104 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 128 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 128 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 128 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 176 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 176 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 176 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path matrix="1 0 0 1 200 0" stroke="black" pen="heavier">
+176 720 m
+4 0 0 4 172 720 168 720 a
+</path>
+<path matrix="1 0 0 1 200 0" stroke="black" pen="heavier">
+168 720 m
+4 0 0 4 164 720 160 720 a
+</path>
+<path matrix="1 0 0 1 200 0" stroke="black" pen="heavier">
+160 720 m
+8 0 0 8 168 720 176 720 a
+</path>
+<path layer="two" matrix="1 0 0 1 104 0" stroke="brew7" pen="heavier">
+184 720 m
+4 0 0 4 180 720 176 720 a
+</path>
+<path matrix="1 0 0 1 104 0" stroke="brew7" pen="heavier">
+192 720 m
+12 0 0 12 180 720 168 720 a
+</path>
+<path matrix="1 0 0 1 104 0" stroke="brew7" pen="heavier">
+200 720 m
+20 0 0 20 180 720 160 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew7" pen="heavier">
+184 720 m
+4 0 0 4 180 720 176 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew7" pen="heavier">
+192 720 m
+12 0 0 12 180 720 168 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew7" pen="heavier">
+200 720 m
+20 0 0 20 180 720 160 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew7" pen="heavier">
+176 720 m
+16 0 0 16 192 720 208 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew7" pen="heavier">
+168 720 m
+24 0 0 24 192 720 216 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew7" pen="heavier">
+160 720 m
+32 0 0 32 192 720 224 720 a
+</path>
+<path matrix="1 0 0 1 176 0" stroke="brew7" pen="heavier">
+184 720 m
+4 0 0 4 180 720 176 720 a
+</path>
+<path matrix="1 0 0 1 176 0" stroke="brew7" pen="heavier">
+192 720 m
+12 0 0 12 180 720 168 720 a
+</path>
+<path matrix="1 0 0 1 176 0" stroke="brew7" pen="heavier">
+200 720 m
+20 0 0 20 180 720 160 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="brew7" pen="heavier">
+184 720 m
+4 0 0 4 180 720 176 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="brew7" pen="heavier">
+192 720 m
+12 0 0 12 180 720 168 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="brew7" pen="heavier">
+200 720 m
+20 0 0 20 180 720 160 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="brew7" pen="heavier">
+176 720 m
+16 0 0 16 192 720 208 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="brew7" pen="heavier">
+168 720 m
+24 0 0 24 192 720 216 720 a
+</path>
+<path matrix="1 0 0 1 152 0" stroke="brew7" pen="heavier">
+160 720 m
+32 0 0 32 192 720 224 720 a
+</path>
+<path layer="three" matrix="1 0 0 1 8 0" stroke="brew4" pen="heavier">
+232 720 m
+4 0 0 4 228 720 224 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew1" pen="ultrafat">
+240 720 m
+12 0 0 12 228 720 216 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="ultrafat">
+248 720 m
+20 0 0 20 228 720 208 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew3" pen="ultrafat">
+256 720 m
+28 0 0 28 228 720 200 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="heavier">
+264 720 m
+36 0 0 36 228 720 192 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew3" pen="ultrafat">
+272 720 m
+44.0907 0 0 44.0907 227.909 720 183.819 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="ultrafat">
+280 720 m
+52 0 0 52 228 720 176 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew1" pen="ultrafat">
+288 720 m
+60 0 0 60 228 720 168 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="heavier">
+296 720 m
+68 0 0 68 228 720 160 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew4" pen="heavier">
+232 720 m
+4 0 0 4 228 720 224 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew1" pen="ultrafat">
+240 720 m
+12 0 0 12 228 720 216 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew4" pen="ultrafat">
+248 720 m
+20 0 0 20 228 720 208 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew3" pen="ultrafat">
+256 720 m
+28 0 0 28 228 720 200 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew4" pen="heavier">
+264 720 m
+36 0 0 36 228 720 192 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew3" pen="ultrafat">
+272 720 m
+44.0907 0 0 44.0907 227.909 720 183.819 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew4" pen="ultrafat">
+280 720 m
+52 0 0 52 228 720 176 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew1" pen="ultrafat">
+288 720 m
+60 0 0 60 228 720 168 720 a
+</path>
+<path matrix="1 0 0 1 80 0" stroke="brew4" pen="heavier">
+296 720 m
+68 0 0 68 228 720 160 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="heavier">
+224 720 m
+40 0 0 40 264 720 304 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew1" pen="ultrafat">
+216 720 m
+48 0 0 48 264 720 312 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="ultrafat">
+208 720 m
+56 0 0 56 264 720 320 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew3" pen="ultrafat">
+200 720 m
+64 0 0 64 264 720 328 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="heavier">
+192 720 m
+72 0 0 72 264 720 336 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew3" pen="ultrafat">
+184 720 m
+80 0 0 80 264 720 344 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="ultrafat">
+176 720 m
+88 0 0 88 264 720 352 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew1" pen="ultrafat">
+168 720 m
+96.0416 0 0 96.0416 264.042 720 360.083 720 a
+</path>
+<path matrix="1 0 0 1 8 0" stroke="brew4" pen="heavier">
+160 720 m
+104 0 0 104 264 720 368 720 a
+</path>
+<use layer="vertices" matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 32 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 32 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 32 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 56 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 56 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 56 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 80 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 80 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 80 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 104 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 104 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 104 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 128 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 128 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 128 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 152 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 152 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 152 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 176 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 176 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 176 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 200 0" name="mark/disk(sx)" pos="160 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 200 0" name="mark/disk(sx)" pos="168 720" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 200 0" name="mark/disk(sx)" pos="176 720" size="normal" stroke="black"/>
+<use layer="two" matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="128 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="192 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="256 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="320 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="384 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="448 512" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="heavier">
+320 512 m
+96 0 0 96 224 512 128 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="heavier">
+448 512 m
+96 0 0 96 352 512 256 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="heavier">
+384 512 m
+32 0 0 32 352 512 320 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="heavier">
+256 512 m
+32 0 0 32 224 512 192 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="heavier">
+192 512 m
+96 0 0 96 288 512 384 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="heavier">
+128 512 m
+160 0 0 160 288 512 448 512 a
+</path>
+<use matrix="1 0 0 1 -23.8 0" name="mark/disk(sx)" pos="128 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -23.8 0" name="mark/disk(sx)" pos="192 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -23.8 0" name="mark/disk(sx)" pos="256 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -23.8 0" name="mark/disk(sx)" pos="320 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -23.8 0" name="mark/disk(sx)" pos="384 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -23.8 0" name="mark/disk(sx)" pos="448 512" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 -23.8 0" stroke="black" pen="heavier">
+320 512 m
+96 0 0 96 224 512 128 512 a
+</path>
+<path matrix="1 0 0 1 -23.8 0" stroke="black" pen="heavier">
+448 512 m
+96 0 0 96 352 512 256 512 a
+</path>
+<path matrix="1 0 0 1 -23.8 0" stroke="black" pen="heavier">
+384 512 m
+32 0 0 32 352 512 320 512 a
+</path>
+<path matrix="1 0 0 1 -23.8 0" stroke="black" pen="heavier">
+256 512 m
+32 0 0 32 224 512 192 512 a
+</path>
+<path matrix="1 0 0 1 -23.8 0" stroke="black" pen="heavier">
+192 512 m
+96 0 0 96 288 512 384 512 a
+</path>
+<path matrix="1 0 0 1 -23.8 0" stroke="black" pen="heavier">
+128 512 m
+160 0 0 160 288 512 448 512 a
+</path>
+<use matrix="1 0 0 1 -7.8 0" name="mark/disk(sx)" pos="128 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -7.8 0" name="mark/disk(sx)" pos="192 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -7.8 0" name="mark/disk(sx)" pos="256 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -7.8 0" name="mark/disk(sx)" pos="320 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -7.8 0" name="mark/disk(sx)" pos="384 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -7.8 0" name="mark/disk(sx)" pos="448 512" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 -7.8 0" stroke="black" pen="heavier">
+320 512 m
+96 0 0 96 224 512 128 512 a
+</path>
+<path matrix="1 0 0 1 -7.8 0" stroke="black" pen="heavier">
+448 512 m
+96 0 0 96 352 512 256 512 a
+</path>
+<path matrix="1 0 0 1 -7.8 0" stroke="black" pen="heavier">
+384 512 m
+32 0 0 32 352 512 320 512 a
+</path>
+<path matrix="1 0 0 1 -7.8 0" stroke="black" pen="heavier">
+256 512 m
+32 0 0 32 224 512 192 512 a
+</path>
+<path matrix="1 0 0 1 -7.8 0" stroke="black" pen="heavier">
+192 512 m
+96 0 0 96 288 512 384 512 a
+</path>
+<path matrix="1 0 0 1 -7.8 0" stroke="black" pen="heavier">
+128 512 m
+160 0 0 160 288 512 448 512 a
+</path>
+<use matrix="1 0 0 1 8.2 0" name="mark/disk(sx)" pos="128 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8.2 0" name="mark/disk(sx)" pos="192 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8.2 0" name="mark/disk(sx)" pos="256 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8.2 0" name="mark/disk(sx)" pos="320 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8.2 0" name="mark/disk(sx)" pos="384 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 8.2 0" name="mark/disk(sx)" pos="448 512" size="normal" stroke="black"/>
+<path matrix="1 0 0 1 8.2 0" stroke="black" pen="heavier">
+320 512 m
+96 0 0 96 224 512 128 512 a
+</path>
+<path matrix="1 0 0 1 8.2 0" stroke="black" pen="heavier">
+448 512 m
+96 0 0 96 352 512 256 512 a
+</path>
+<path matrix="1 0 0 1 8.2 0" stroke="black" pen="heavier">
+384 512 m
+32 0 0 32 352 512 320 512 a
+</path>
+<path matrix="1 0 0 1 8.2 0" stroke="black" pen="heavier">
+256 512 m
+32 0 0 32 224 512 192 512 a
+</path>
+<path matrix="1 0 0 1 8.2 0" stroke="black" pen="heavier">
+192 512 m
+96 0 0 96 288 512 384 512 a
+</path>
+<path matrix="1 0 0 1 8.2 0" stroke="black" pen="heavier">
+128 512 m
+160 0 0 160 288 512 448 512 a
+</path>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="312 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="184 512" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -39.8 0" name="mark/disk(sx)" pos="440 512" size="normal" stroke="brew4"/>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew4" pen="fat">
+312 512 m
+64 0 0 64 248 512 184 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew4" pen="fat">
+440 512 m
+64 0 0 64 376 512 312 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew4" pen="fat">
+184 512 m
+128 0 0 128 312 512 439.941 515.877 a
+</path>
+<path layer="alpha" matrix="1 0 0 1 -39.8 0" stroke="brew4" pen="fat">
+224 512 m
+20 0 0 20 204 512 184 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew4" pen="fat">
+184 512 m
+20 0 0 20 164 512 144 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew4" pen="fat">
+144 512 m
+40.0998 0 0 40.0998 184.1 512 224.2 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew5" pen="ultrafat">
+192 512 m
+32 0 0 32 160 512 128 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew5" pen="ultrafat">
+208 512 m
+8 0 0 8 200 512 192 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew5" pen="ultrafat">
+208 512 m
+24 0 0 -24 184 512 160 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew5" pen="ultrafat">
+160 512 m
+8 0 0 -8 168 512 176 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew5" pen="ultrafat">
+176 512 m
+32 0 0 -32 208 512 240 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="brew5" pen="ultrafat">
+240 512 m
+56.0713 0 0 -56.0713 183.929 512 127.857 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+128 512 m
+8 0 0 -8 136 512 144 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+144 512 m
+8 0 0 -8 152 512 160 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+160 512 m
+16 0 0 -16 144 512 128 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+184 512 m
+4 0 0 -4 188 512 192 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+192 512 m
+8 0 0 -8 184 512 176 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+176 512 m
+4 0 0 -4 180 512 184 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+224 512 m
+8 0 0 -8 232 512 240 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+240 512 m
+16 0 0 -16 224 512 208 512 a
+</path>
+<path matrix="1 0 0 1 -39.8 0" stroke="black" pen="fat">
+208 512 m
+8 0 0 -8 216 512 224 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew4" pen="fat">
+224 512 m
+20 0 0 20 204 512 184 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew4" pen="fat">
+184 512 m
+20 0 0 20 164 512 144 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew4" pen="fat">
+144 512 m
+40.0998 0 0 40.0998 184.1 512 224.2 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew5" pen="ultrafat">
+192 512 m
+32 0 0 32 160 512 128 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew5" pen="ultrafat">
+208 512 m
+8 0 0 8 200 512 192 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew5" pen="ultrafat">
+208 512 m
+24 0 0 -24 184 512 160 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew5" pen="ultrafat">
+160 512 m
+8 0 0 -8 168 512 176 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew5" pen="ultrafat">
+176 512 m
+32 0 0 -32 208 512 240 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="brew5" pen="ultrafat">
+240 512 m
+56.0713 0 0 -56.0713 183.929 512 127.857 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+128 512 m
+8 0 0 -8 136 512 144 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+144 512 m
+8 0 0 -8 152 512 160 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+160 512 m
+16 0 0 -16 144 512 128 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+184 512 m
+4 0 0 -4 188 512 192 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+192 512 m
+8 0 0 -8 184 512 176 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+176 512 m
+4 0 0 -4 180 512 184 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+224 512 m
+8 0 0 -8 232 512 240 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+240 512 m
+16 0 0 -16 224 512 208 512 a
+</path>
+<path matrix="1 0 0 1 88.2 0" stroke="black" pen="fat">
+208 512 m
+8 0 0 -8 216 512 224 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew4" pen="fat">
+224 512 m
+20 0 0 20 204 512 184 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew4" pen="fat">
+184 512 m
+20 0 0 20 164 512 144 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew4" pen="fat">
+144 512 m
+40.0998 0 0 40.0998 184.1 512 224.2 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew5" pen="ultrafat">
+192 512 m
+32 0 0 32 160 512 128 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew5" pen="ultrafat">
+208 512 m
+8 0 0 8 200 512 192 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew5" pen="ultrafat">
+208 512 m
+24 0 0 -24 184 512 160 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew5" pen="ultrafat">
+160 512 m
+8 0 0 -8 168 512 176 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew5" pen="ultrafat">
+176 512 m
+32 0 0 -32 208 512 240 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="brew5" pen="ultrafat">
+240 512 m
+56.0713 0 0 -56.0713 183.929 512 127.857 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+128 512 m
+8 0 0 -8 136 512 144 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+144 512 m
+8 0 0 -8 152 512 160 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+160 512 m
+16 0 0 -16 144 512 128 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+184 512 m
+4 0 0 -4 188 512 192 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+192 512 m
+8 0 0 -8 184 512 176 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+176 512 m
+4 0 0 -4 180 512 184 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+224 512 m
+8 0 0 -8 232 512 240 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+240 512 m
+16 0 0 -16 224 512 208 512 a
+</path>
+<path matrix="1 0 0 1 216.2 0" stroke="black" pen="fat">
+208 512 m
+8 0 0 -8 216 512 224 512 a
+</path>
+</page>
+</ipe>

@@ -58,6 +58,8 @@
 \DeclareMathOperator{\tw}{tw}
 \DeclareMathOperator{\gm}{gm}
 \DeclareMathOperator{\gs}{gs}
+\DeclareMathOperator{\qn}{qn}
+\DeclareMathOperator{\sn}{sn}
 \DeclareMathOperator{\stw}{stw}
 \DeclareMathOperator{\ltw}{ltw}
 \DeclareMathOperator{\pw}{pw}
@@ -151,22 +153,88 @@ Both of the preceding arguments seems to break down immediately, even for $k=2$.
 Another candidate graph is the following: $G_1\cup G_2$ form an $n\times n$ grid.  (This has a realization as a 2-page graph where $v_1,\ldots,v_n$ is the snake-like path through the rows of the grid, $G_1$ contains the vertical grid edges from row $i$ to row $i+1$ for odd $i$, and $G_2$ contains the remaining vertical grid edges.)  The graph $G_3$ is the random graph $R_1$ described above.
 
 First we'd like to see if the treewidth of this graph is large.  We might try to do this as follows:
-\begin{comopactenum}
+\begin{compactenum}
     \item Fix a separation $(A,B)$ of $G_1\cup G_2$ of order $O(\sqrt{n})$.
     \item This separation divides $v_1,\ldots,v_n$ into $O(sqrt(n))$ intervals.  Some of these are in $A\setminus B$ and some of these are in $B\setminus A$.
     \item The
+\end{compactenum}
 
 
-The idea to do this would be to check the following:
+\subsection{Another Candidate: The $3$-Ary Hypertwist}
+
+Let $N:=3^{d-1}$ for some integer $d\ge 1$.  Given a sequence $V:=x_1,\ldots,x_{N},y_1,\ldots,y_N,z_1,\ldots,z_N$ of $3^d$ distinct vertices we define the \emph{$3$-ary hypertwist} $H_V:=H$ over $V$ as follows (see \cref{hypertwist}):
+\begin{compactenum}
+    \item $V(H_V):=\{V\}$;
+    \item $E(H_V)$ contains $\bigcup_{i=1}^N\{x_iy_i, y_iz_i, x_iz_{n-i+1}\}$; and
+    \item If $d \ge 2$ then $H_d$ contains $H_{x_1,\ldots,x_N}$, $H_{y_1,\ldots,y_N}$ and $H_{z_1,\ldots,z_N}$.
+\end{compactenum}
+
+\begin{figure}
+    \begin{center}
+        \includegraphics{figs/hypertwist-3}
+    \end{center}
+    \caption{The graph $H_3$. In this drawing the vertices appear in the order $x_1,\ldots,X_N,y_N,\ldots,y_1,z_1,\ldots,z_N$.}
+    \label{hypertwist}
+\end{figure}
+
+We call $H_V$ a \emph{hypertwist of dimension $d$} and we denote it by $H_d$. For convenience, $H_0$ is the graph consisting of a single vertex. The following is easily proven by induction on $d$ (and \cref{hypertwist} illustrates the ordering used in the stack layout):
+
+\begin{lem}\label{hypertwist_sn}
+    $\sn(H_d) \le 3d-2$.
+\end{lem}
+
+If we can prove the following conjecture then we are done:
+
+\begin{conj}\label{hypertwist_qn_conjecture}
+    There exists an integer $d_0$ and real $\alpha >0$ such that $\qn(H_d)\ge 3^{\alpha d}$ for all $d\ge d_0$.
+\end{conj}
+
+Explanation:  A lemma of \citet{dujmovic.wood:stacks} states that, if queue-number is bounded by stack-number, then queue-number is bounded by a polynomial function of stack number. More precisely, if there exists a function $f:\N\to\N$ such that $\qn(G)\le f(\sn(G))$ for all graphs $G$ then there exists a constant $c$ such that $\qn(G)\in O((\sn(G))^c)$ for all graphs $G$.  By \cref{hypertwist_sn}, $\sn(H_d)=O(d)$, but \cref{hypertwist_qn_conjecture} asserts that $\qn(G)\ge 3^{\Omega(d)}$.  We are done because $\qn(H_d)\ge 3^{\Omega(d)} \not\in O(d^c)=\sn(H_d)$ for any constant $c$.
 
 
+This graph behaves a lot like a $3$-ary hypercube.
+
+\begin{compactenum}
+    \item Each vertex of $H_d$ has degree $2d$.
+    \item $H_d$ has diameter $d$ (use the coordinate-based routing algorithm, like in a hypercube).
+    \item I think (but would have to prove) that any $m$-vertex subgraph of $H_d$ has average degree at most $2\log_3 m$.  (Heath, Leighton, and Rosenberg proved this for the $3$-ary hypercube.)
+\end{compactenum}
 
 
-The idea here is that
+\subsection{(Failed) Attempt to Layout $H_d$}
+
+For any $i\in\{1,\ldots,N\}$, let $\overline{\imath}:=N-i+1$. For $v:=x_i$, let $\overline{v}:=z_{\overline\imath}$. For $v:=y_i$, let $\overline{v}:=y_{\overline\imath}$.  We will prove, by induction on $d$ that $H_d$ has an $cd$-queue layout in which $S:=\{v-\overline{v}:v\in V(H_d)\}$  has size $d^{O(1)}$.  The base case $d=1$ is trivial: $H_1$ consists of three copies $H_{x_1},H_{y_1},H_{z_1}$ forming a $3$-cycle. Use the vertex ordering $x_1<y_1<z_1$ and one queue.
+
+For $d>1$, recursively compute a $c(d-1)$-queue layout of $H_{y_1,\ldots,y_N}$.  Use the same layout for $H_{x_1,\ldots,x_N}$ and for $H_{z_1,\ldots,z_N}$ and, in the ordering of $H_V$, use the order $V(H_{x_1,\ldots,x_N}) < V(H_{y_1,\ldots,y_N}) < V(H_{z_1,\ldots,z_N})$.
+
+First we have to show that this layout requires at most $cd$ queues. By induction,  the layouts of the three recursive subgraphs use $c(d-1)$ queues.  The edges that are not contained in one of the three recursive subgraphs can be decomposed into $\lfloor N/6\rfloor$ $6$-cycles of the form $x_i,y_i,z_i,x_{\overline\imath},y_{\overline{\imath}},z_{\overline{\imath}}$ and one $3$-cycle $x_{\ceil{N/2}},y_{\ceil{N/2}},z_{\ceil{N/2}}$.  In the ordering described above, the edges of the $3$-cycle all have length $N$ and four of the edges of each $6$-cycle all have length $n$.  The two other edges of the $6$-cycle have length $2N+y_{i}-y_{\overline{\imath}}$ and $2N-y_{i}+y_{\overline{\imath}}$.\todo{Abusing notation a little here.}
 
 
+STOP: This will fail because we eventually get a recurrence for $|S|$ that looks like $s_d \le 1 + 2s_{d-1}$.  The one counts edges of length $N$. The first $s_{d-1}$ counts the edge lengths that appear in $H_y$.  The second $s_{d-1}$ counts the new edge lengths of the form $2N+y_i-y_{\overline\imath}$.  This resolves to $c^d$ for some $c\ge 2$.
 
 
+LESSON: To show that $\qn(H_d)\ge 3^{\Omega(d)}$ we could first try to show that the number of edge lengths used in a queue layout of $H_d$ is at least $3^{\Omega(d)}$.    Note that this isn't true for the standard ternary $d$-cube.  There the queue layout only uses edges of length $3^i$ and $2\cdot 3^i$ for $i\in\{0,\ldots,d-1\}$.
+
+
+% WAIT: We need that the distance $y_i-y_{\overline{\imath}}$ is fixed, independent of $i$ (or comes from a set of size $d^{O(1)}$).  If I really want that difference to be fixed, then there are only $O(N)$ possible orderings. Indeed, once we fix the ordering of $y_1,\ldots,y_{m-1}$ the ordering of $y_{m+1},\ldots,y_N$ is also fixed, and these two sets must perfectly interleave where they overlap.  If we try to put this into the inductive hypothesis, then this breaks everything because $|y_i-y_{\overline\imath}| < N$ but $|x_i-\overline{z_{\imath}}|\ge N$.  Indeed, this completely rules out a recursive layout in which $H_x<H_y<H_z$.
+%
+% Can we make it so that $v-\overline{v}$ falls into a set of size $d^{O(1)}$?  No: If we try to set up a recurrence where $s_d$ tries to count
+
+% we then have to show that $x_i$ and This breaks everything, because it says that $x_i$ and $z_{\not}
+%
+%
+%
+%
+% Now, inductively find a layout of $H_{x_1,\ldots,x_N}$ using $c(d-1)$ queues.  Use the same layout for $H_{y_1,\ldots,y_N}$ and $H_{z_1,\ldots,z_N}$.  Put these three layouts in order.  Now, each of the $6$-cycles described above has $4$ edges of length $N$
+
+
+\begin{figure}
+    \begin{center}
+        \includegraphics{figs/hypertwist_qn-4}
+    \end{center}
+    \caption{The ordering used in an efficient queue layout of $H_3$.}
+    \label{hypertwist_qn}
+\end{figure}
 
 
 
