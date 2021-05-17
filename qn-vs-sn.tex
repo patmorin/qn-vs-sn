@@ -201,44 +201,147 @@ This graph behaves a lot like a $3$-ary hypercube.
 \end{compactenum}
 
 
-\subsection{(Failed) Attempt to Layout $H_d$}
+Let's start with a basic and well-known lemma:
 
-For any $i\in\{1,\ldots,N\}$, let $\overline{\imath}:=N-i+1$. For $v:=x_i$, let $\overline{v}:=z_{\overline\imath}$. For $v:=y_i$, let $\overline{v}:=y_{\overline\imath}$.  We will prove, by induction on $d$ that $H_d$ has an $cd$-queue layout in which $S:=\{v-\overline{v}:v\in V(H_d)\}$  has size $d^{O(1)}$.  The base case $d=1$ is trivial: $H_1$ consists of three copies $H_{x_1},H_{y_1},H_{z_1}$ forming a $3$-cycle. Use the vertex ordering $x_1<y_1<z_1$ and one queue.
+\begin{lem}\label{rainbow_alternative}
+    Let $M$ be a perfect matching with edge set $E(M):=\{a_ib_i:i\in\{1,\ldots,k\}\}$ and let $<$ be a total order on $V(M)$.  Then $M$ contains a rainbow of size at least $q$ or there exists $I\subset\{1,\ldots,k\}$, $|I|\ge k/q$ such that $a_i < a_j$ if and only if $b_i< b_j$ for each $i,j\in I$.
+\end{lem}
 
-For $d>1$, recursively compute a $c(d-1)$-queue layout of $H_{y_1,\ldots,y_N}$.  Use the same layout for $H_{x_1,\ldots,x_N}$ and for $H_{z_1,\ldots,z_N}$ and, in the ordering of $H_V$, use the order $V(H_{x_1,\ldots,x_N}) < V(H_{y_1,\ldots,y_N}) < V(H_{z_1,\ldots,z_N})$.
-
-First we have to show that this layout requires at most $cd$ queues. By induction,  the layouts of the three recursive subgraphs use $c(d-1)$ queues.  The edges that are not contained in one of the three recursive subgraphs can be decomposed into $\lfloor N/6\rfloor$ $6$-cycles of the form $x_i,y_i,z_i,x_{\overline\imath},y_{\overline{\imath}},z_{\overline{\imath}}$ and one $3$-cycle $x_{\ceil{N/2}},y_{\ceil{N/2}},z_{\ceil{N/2}}$.  In the ordering described above, the edges of the $3$-cycle all have length $N$ and four of the edges of each $6$-cycle all have length $n$.  The two other edges of the $6$-cycle have length $2N+y_{i}-y_{\overline{\imath}}$ and $2N-y_{i}+y_{\overline{\imath}}$.\todo{Abusing notation a little here.}
-
-
-STOP: This will fail because we eventually get a recurrence for $|S|$ that looks like $s_d \le 1 + 2s_{d-1}$.  The one counts edges of length $N$. The first $s_{d-1}$ counts the edge lengths that appear in $H_y$.  The second $s_{d-1}$ counts the new edge lengths of the form $2N+y_i-y_{\overline\imath}$.  This resolves to $c^d$ for some $c\ge 2$.
-
-
-LESSON: To show that $\qn(H_d)\ge 3^{\Omega(d)}$ we could first try to show that the number of edge lengths used in a queue layout of $H_d$ is at least $3^{\Omega(d)}$.    Note that this isn't true for the standard ternary $d$-cube.  There the queue layout only uses edges of length $3^i$ and $2\cdot 3^i$ for $i\in\{0,\ldots,d-1\}$.
+\begin{proof}
+    Apply Dilworth's Theorem to the partial order $(\prec,\{1,\ldots,k\})$ in which $i\prec j$ if and only if $a_i<a_j$ and $b_i < b_j$.  Any antichain in $\prec$ is a rainbow and any chain in $\prec$ is the set $I$ in the second alternative.
+\end{proof}
 
 
-% WAIT: We need that the distance $y_i-y_{\overline{\imath}}$ is fixed, independent of $i$ (or comes from a set of size $d^{O(1)}$).  If I really want that difference to be fixed, then there are only $O(N)$ possible orderings. Indeed, once we fix the ordering of $y_1,\ldots,y_{m-1}$ the ordering of $y_{m+1},\ldots,y_N$ is also fixed, and these two sets must perfectly interleave where they overlap.  If we try to put this into the inductive hypothesis, then this breaks everything because $|y_i-y_{\overline\imath}| < N$ but $|x_i-\overline{z_{\imath}}|\ge N$.  Indeed, this completely rules out a recursive layout in which $H_x<H_y<H_z$.
+\begin{lem}\label{x-to-z}
+    Let $(<,\varphi)$ be a $<q$-queue layout of $H_d$. Then, for any $I\subset\{1,\ldots,N\}$, there exists $I'\subseteq I$, $|I'|\ge|I|/q^2$ such that, for each $i,j\in I$, $x_i<y_j$ if and only if $y_i < y_j$ and $z_i < z_j$.
+\end{lem}
+
+\begin{proof}
+    Since $(<,\varphi)$ is a $<q$-queue layout, $H_d$ does not contain any rainbow of size $q$ with respect to $<$.  Apply \cref{rainbow_alternative} twice, once using the matching $\{x_iy_i: i\in I\}$ to obtain a set $I_1$ of size at least $|I|/q$ and a second time to the matching $\{y_i z_i: i\in I_1\}$ to obtain the set $I'$ of size at least $|I|/q^2$.
+\end{proof}
+
+\begin{lem}
+    Let $(<,\varphi)$ be a $<q$-queue layout of $H_d$. Then there exists $I\subset\{1,\ldots,N\}$ with the following properties:
+    \begin{compactenum}
+        \item $|I'|\ge N/q^3$;
+        \item for each $i\in I$, $\overline\imath\in I$;
+        \item for each distinct $i,j\in \{x\in I:x < N/2\}$, $x_i < x_j$ if and only if $x_{\overline\imath}< x_{\overline\jmath}$; and
+        \item $i,j\in I$, $x_i<y_j$ if and only if $y_i < y_j$ and $z_i < z_j$.
+    \end{compactenum}
+\end{lem}
+
+\begin{proof}
+    First apply \cref{rainbow_alternative} to the matching $\{x_ix_{\overline\imath}: i\in\{1,\ldots,N\}\}$ then apply \cref{x-to-z} to the resulting set.
+\end{proof}
+
+For $I\subseteq\{1,\ldots,N\}$, let $x_I:=\{x_i:i\in I\}$, define $y_I$ and $z_I$ similarly, and define $G_I:=G[x_I\cup y_I\cup z_I]$.  We say that such a set $I$ is \emph{symmetric} if $\overline{v}\in V(G_I)$ for each $v\in V(G_I)$.
+
+\begin{lem}
+    If there exists a $k$-element symmetric set $I\subset\{1,\ldots,N\}$ such that $x_I\cup y_I$ is separated from $z_I$ with respect to $<$, then $H_d$ contains a rainbow of size $k^{c}$.
+\end{lem}
+
+\begin{proof}
+    Here are the steps in the proof:
+    \begin{compactenum}
+        \item Use pigeonhole to find $I_1\subseteq I$ of size at lest $k/2$ such that $x_i< y_i$ for each $i\in I_1$.
+
+        \item Use Dilworth's Theorem and the existence of each edge $x_ix_{\overline\imath}$ to find $I_2\subseteq I_1$ such that $x_{\{i\in I_2:i\le N/2\}}$ and $x_{\{i\in I_2:i\ge N/2\}}$ have the same order (where we match $x_i$ with $x_{\overline{\imath}}$).
+
+        \item Use Dilworth and the existence of the edge $x_iy_i$ to find $I_3\subseteq I_2$ such that $x_{I_2}$ and $y_{I_2}$ have the same ordering (where we match $x_i$ with $y_i$).
+
+        % \item Use Dilworth and the existence of the edge $z_iz_{\overline\imath}$ to find $I_4\subseteq I_3$ such that $z_{\{i\in I_3:i\le N/2\}}$ and $z_{\{i\in I_3:i\ge N/2\}}$ have the same order (where we match $z_i$ with $z_{\overline{\imath}}$).
+    \end{compactenum}
+    Now we're done.  Let $I_4':=\{i\in I_4:i\le N/2\}$ and let $\overline{I}_4':= I_4\setminus I_4'$.
+    If $y_{I_4'}$ and $z_{I_4'}$ don't contain a big rainbow then $y_{I_4}$ and $z_{I_4'}$ contain a big twist.  By Step~2 above, $x_{I_4'}$ and $y_{I_4'}$ have the same order.  By Step~1 above, $x_{I_4'}$ and $y_{\overline{I}_4'}$ have the same order.  This implies that the edge set $\{x_{\overline{\imath}}z_i:i\in I_4'\}$ form a big rainbow.
+\end{proof}
+
+
+
+\begin{lem}
+    If there exists a $k$-element symmetric set $I\subset\{1,\ldots,N\}$ such that $x_I\cup z_I$ is separated from $y_I$ with respect to $<$, then $H_d$ contains a rainbow of size $k^{1/4}/sqrt{2}$.
+\end{lem}
+
+\begin{proof}
+    Similar to the previous proof, except that
+\end{proof}
+
+
+
+\begin{obs}\label{cant_separate}
+    If there exists a set $I$ such that $x_I$, $y_I$ and $z_I$ are separated with respect to $<$, then $H_d$ contains a rainbow of size at least $\sqrt[4]{|I|}$.
+\end{obs}
+
+\begin{proof}
+    By Dilworth's Theorem, if $G$ does not contain a rainbow of size $\sqrt{|I|}$ then there is a subset $I'\subseteq I$ of size at least $\sqrt{|I|}$ such that $x_{I'}$ and $y_{I'}$ form a twist.  Another application of Dilwerth's Theorem then implies that there exits $I''$ of size at least $\sqrt[4]{|I|}$ such that $y_{I''}$ and  $z_{I''}$ form a twist.  But then $x_{I''}$ and $z_{I''}$ form a rainbow.
+\end{proof}
+
+
+\cref{cant_separate} implies that, in any efficient queue layout of $H_d$, the vertex sets of at least two of $G_x$, $G_y$, and $G_z$ must be highly interleaved.  What happens if we just try to interleave $G_x$ and $G_y$ (and leave $G_z$ separated)?  Actually, that also implies a large rainbow.  Use Dilworth to show that (because $H_d$ contains the edge $x_{i}y_i$ is in $H_d$ for each $i\in I$) there exists a subset $I'$ of $I$ so that the ordering of $x_{I'}$ and $y_{I'}$ is the same.  Then apply Dilworth again.
+
+What happens if we try to interleave $G_x$ and $G_z$ but leave $G_y$ separated?  The same problem:  We find $I'$ such that $x_{I'}$ and $z_{I'}$ are reversed.  Therefore one of them forms a big rainbow with $y_{I'}$.  So, ultimately, it must be that $G_x$, $G_y$, and $G_z$ are all highly interleaved.
+
+
+% \subsection{(Failed) Attempt to Layout $H_d$}
 %
-% Can we make it so that $v-\overline{v}$ falls into a set of size $d^{O(1)}$?  No: If we try to set up a recurrence where $s_d$ tries to count
-
-% we then have to show that $x_i$ and This breaks everything, because it says that $x_i$ and $z_{\not}
+% For any $i\in\{1,\ldots,N\}$, let $\overline{\imath}:=N-i+1$. For $v:=x_i$, let $\overline{v}:=z_{\overline\imath}$. For $v:=y_i$, let $\overline{v}:=y_{\overline\imath}$.  We will prove, by induction on $d$ that $H_d$ has an $cd$-queue layout in which $S:=\{v-\overline{v}:v\in V(H_d)\}$  has size $d^{O(1)}$.  The base case $d=1$ is trivial: $H_1$ consists of three copies $H_{x_1},H_{y_1},H_{z_1}$ forming a $3$-cycle. Use the vertex ordering $x_1<y_1<z_1$ and one queue.
+%
+% For $d>1$, recursively compute a $c(d-1)$-queue layout of $H_{y_1,\ldots,y_N}$.  Use the same layout for $H_{x_1,\ldots,x_N}$ and for $H_{z_1,\ldots,z_N}$ and, in the ordering of $H_V$, use the order $V(H_{x_1,\ldots,x_N}) < V(H_{y_1,\ldots,y_N}) < V(H_{z_1,\ldots,z_N})$.
+%
+% First we have to show that this layout requires at most $cd$ queues. By induction,  the layouts of the three recursive subgraphs use $c(d-1)$ queues.  The edges that are not contained in one of the three recursive subgraphs can be decomposed into $\lfloor N/6\rfloor$ $6$-cycles of the form $x_i,y_i,z_i,x_{\overline\imath},y_{\overline{\imath}},z_{\overline{\imath}}$ and one $3$-cycle $x_{\ceil{N/2}},y_{\ceil{N/2}},z_{\ceil{N/2}}$.  In the ordering described above, the edges of the $3$-cycle all have length $N$ and four of the edges of each $6$-cycle all have length $n$.  The two other edges of the $6$-cycle have length $2N+y_{i}-y_{\overline{\imath}}$ and $2N-y_{i}+y_{\overline{\imath}}$.\todo{Abusing notation a little here.}
 %
 %
+% STOP: This will fail because we eventually get a recurrence for $|S|$ that looks like $s_d \le 1 + 2s_{d-1}$.  The one counts edges of length $N$. The first $s_{d-1}$ counts the edge lengths that appear in $H_y$.  The second $s_{d-1}$ counts the new edge lengths of the form $2N+y_i-y_{\overline\imath}$.  This resolves to $c^d$ for some $c\ge 2$.
+%
+% Here's an even easier reason why this can't work: Split the vertices of $G_3$ into two groups: the first half $z_1,\ldots,z_{N/2}$ and the second half  $z_{N/2+1},\ldots,z_N$.  The first half is connected to $x_{N/2}+1,\ldots,x_{N}$ and the second half is connected to $x_{1},\ldots,x_{N/2}$.  All of these edges overlap so they contain a rainbow a twist of size at least $\Omega(\sqrt{n})$.  But a twist in the first set is a rainbow in the second set, so we definitely get a rainbow of size at least $\sqrt{n}$.
 %
 %
-% Now, inductively find a layout of $H_{x_1,\ldots,x_N}$ using $c(d-1)$ queues.  Use the same layout for $H_{y_1,\ldots,y_N}$ and $H_{z_1,\ldots,z_N}$.  Put these three layouts in order.  Now, each of the $6$-cycles described above has $4$ edges of length $N$
-
-
-\begin{figure}
-    \begin{center}
-        \includegraphics{figs/hypertwist_qn-4}
-    \end{center}
-    \caption{The ordering used in an efficient queue layout of $H_3$.}
-    \label{hypertwist_qn}
-\end{figure}
-
-
-
-
+% LESSON 1: To show that $\qn(H_d)\ge 3^{\Omega(d)}$ we could first try to show that the number of edge lengths used in a queue layout of $H_d$ is at least $3^{\Omega(d)}$.    Note that this isn't true for the standard ternary $d$-cube.  There the queue layout only uses edges of length $3^i$ and $2\cdot 3^i$ for $i\in\{0,\ldots,d-1\}$. This turns out not to be so useful (see below).
+%
+% Lesson 2: The preceding argument shows that we have to interleave $V(G_x)$ and $V(G_z)$ or we have to use different layouts for $G_x$ and $G_z$.  The same goes for $G_y$ and $G_z$.
+%
+% \begin{compactenum}
+%     \item If we use the same (or a mirrored) layout of $G_x$ and $G_z$ and interleave $G_x$ and $G_z$ in the obvious way, so that $x_1<z_1<\cdots<x_N<z_N$ then we immediately get a rainbow.  If we try to reverse $G_z$ so that $x_1<z_N<\cdots<x_N<z_1$ then we're ok, but we end up being constrained to using a \emph{symmetric} layout (where the symmetry is around $y_{N/2}$). This is impossible because interleaving $G_x$ and $G_z$ implies that the layout is not symmetric.
+%
+%     \item If we try to separate $G_x$ and $G_z$
+% \end{compactenum}
+%
+% % WAIT: We need that the distance $y_i-y_{\overline{\imath}}$ is fixed, independent of $i$ (or comes from a set of size $d^{O(1)}$).  If I really want that difference to be fixed, then there are only $O(N)$ possible orderings. Indeed, once we fix the ordering of $y_1,\ldots,y_{m-1}$ the ordering of $y_{m+1},\ldots,y_N$ is also fixed, and these two sets must perfectly interleave where they overlap.  If we try to put this into the inductive hypothesis, then this breaks everything because $|y_i-y_{\overline\imath}| < N$ but $|x_i-\overline{z_{\imath}}|\ge N$.  Indeed, this completely rules out a recursive layout in which $H_x<H_y<H_z$.
+% %
+% % Can we make it so that $v-\overline{v}$ falls into a set of size $d^{O(1)}$?  No: If we try to set up a recurrence where $s_d$ tries to count
+%
+% % we then have to show that $x_i$ and This breaks everything, because it says that $x_i$ and $z_{\not}
+% %
+% %
+% %
+% %
+% % Now, inductively find a layout of $H_{x_1,\ldots,x_N}$ using $c(d-1)$ queues.  Use the same layout for $H_{y_1,\ldots,y_N}$ and $H_{z_1,\ldots,z_N}$.  Put these three layouts in order.  Now, each of the $6$-cycles described above has $4$ edges of length $N$
+%
+%
+% \begin{figure}
+%     \begin{center}
+%         \includegraphics{figs/hypertwist_qn-4}
+%     \end{center}
+%     \caption{The ordering used in an efficient queue layout of $H_3$.}
+%     \label{hypertwist_qn}
+% \end{figure}
+%
+%
+% \subsection{A New Edge-Length-Based Parameter}
+%
+% Let $M$ be a $2k$-vertex perfect matching with edge set $\{(a_i,b_i):i\in\{1,\ldots,k\}\}$ and let $<$ be a total order of $V(M)$ such that $a_i < b_j$ for all $i,j\in\{1,\ldots,k\}$.  The \emph{length} of an edge $vw$ in $M$ is $\ell_<(vw):=1+|\{x\in V(M): v < x< w\}|$.  Define the \emph{length set} $L(M):=\{\ell(vw):vw\in E(M)$.
+%
+% Clearly, if $M$ contains a rainbow (with respect to $<$) of size $r$, then $|L(M)|\ge r$.  I believe there is also an inequality in the other direction:
+%
+% \begin{conj}
+%     There exists $a,c >0$ such that, if $|L(M)|\ge r$ then $M$ contains a rainbow of size at least $ar^{c}$.
+% \end{conj}
+%
+% The preceding conjecture is false.  Let $k$ be an even integer and use the order $a_1<\cdots<a_k$ and $b_1<b_{k/2+1}<b_2<b_{k/2+2}<\cdots< b_{k-1}<b_k$.  Then the largest rainbow has size $2$ since $a_ib_i$ and $a_jb_j$ don't nest unless $i \le k/2$ and $j\ge k/2$.  Furthermore, for $i\le k/2$, $\ell(i):=\ell(a_ib_i)=k-i+(2i-1)=k+i-1$ is an increasing function of $i$, so $|L(M)|\ge k/2$.
+%
+% Actually for $i > k/2$, $\ell(i):=\ell(a_ib_i)=k-i+2(i-k/2)=i$. This function takes on all values in the set $\{f(k/2+1)\ldots,f(k)\}=\{k/2+1,\ldots,k\}$. So, actually, $|L(M)|=k-1$.  (If we use an odd $k$, then we can get $|L(M)|=k$.)
+%
+% This gives an alternative way to do bipartite matchings that has lots of different edge lengths and small rainbows.  Maybe this can be used to find a queue layout of $H_d$?
+%
 
 \bibliographystyle{plainurlnat}
 \bibliography{qn-vs-sn}
