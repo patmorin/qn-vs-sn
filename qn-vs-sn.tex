@@ -255,6 +255,23 @@ For $I\subseteq\{1,\ldots,N\}$, let $x_I:=\{x_i:i\in I\}$, define $y_I$ and $z_I
     If $y_{I_4'}$ and $z_{I_4'}$ don't contain a big rainbow then $y_{I_4}$ and $z_{I_4'}$ contain a big twist.  By Step~2 above, $x_{I_4'}$ and $y_{I_4'}$ have the same order.  By Step~1 above, $x_{I_4'}$ and $y_{\overline{I}_4'}$ have the same order.  This implies that the edge set $\{x_{\overline{\imath}}z_i:i\in I_4'\}$ form a big rainbow.
 \end{proof}
 
+\begin{lem}
+  For any $q$-queue layout $(<,\varphi)$  of $H_d$, there exists $I\subseteq\{1,\ldots,N/2\}$ and an integer $s\in\{1,\ldots,6\}$ such that:
+  \begin{compactenum}[(i)]
+    \item $|I|\ge N/q^{O(1)}-f(q)$, for some fixed $f:\N\to\N$;
+
+    \item for each $i,j,\in\{1,\ldots,N/2\}$, the permutation of $R_i:=x_i,x_{\overline{\imath}},y_i,y_{\overline{\imath}},z_i,z_{\overline{\imath}}$ defined by $<$ is the same as the permutation of $R_j:=x_j,x_{\overline{\jmath}},y_j,y_{\overline{\jmath}},z_j,z_{\overline{\jmath}}$ defined by $<$; and
+
+    \item for each distinct $i,j\in\{1,\ldots,N/2\}$, $R_i$ is an $s'$-shift of $R_j$ for some $s'\in\{-s,s\}$.
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}[Proof Sketch]
+  First classify $i\in\{1,\ldots,N/2\}$ based on the permutation of $R_i$ (there are only $6!$) and then on the edge-colouring of (a spanning tree of) $H_d[R_i]$ (there are only $q^5$).  Taking the biggest class gives us a set $I_0$ of size at least $N/(2\cdot 6!\cdot q^5)$ that satifies (ii).  Now, classify each pair $i,j\in I_0$ based on how $R_i$ and $R_j$ interleave.  There are no more than $2^{12}$ categories and $6$ of them are $s$-shifts.  Suppose that one of the categories, $C$, that is not an $s$-shift has size greater than $f(q)$ for some (very fast growing function $f$).  Then, by Ramsey's Theorem there exists $J\subseteq I_0$ of size at least $q^c$ such that each pair in $J$ is in category $C$. Now argue that results in a rainbow of size greater than $q$.
+
+  Conclude that these ``non-shift'' categories have total size at most $2^{12}f(q)$, so one of the $6$ shift categories has size at least $(|I_0|-2^{12}f(q))/6$.
+\end{proof}
+
 
 
 \begin{lem}
