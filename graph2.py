@@ -24,8 +24,10 @@ def graph(n, d):
     a = list(range(n))
     b = [x+n for x in a]
     c = [x+2*n for x in a]
-    edges.extend(matching(a,b))
-    edges.extend(matching(b,c))
+    # edges.extend(matching(a,b))
+    # edges.extend(matching(b,c))
+    edges.extend(expander(a, b[::-1], d))
+    edges.extend(expander(b[::-1], c, d))
     edges.extend(expander(a, c[::-1], d))
     return edges
 
@@ -37,6 +39,7 @@ def dot_output(edges):
 
 
 if __name__ == "__main__":
+    random.seed(0)
     n = 23
     d = 4
     if len(sys.argv) > 1:

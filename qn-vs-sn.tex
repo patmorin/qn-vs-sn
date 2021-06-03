@@ -234,26 +234,27 @@ Let's start with a basic and well-known lemma:
     First apply \cref{rainbow_alternative} to the matching $\{x_ix_{\overline\imath}: i\in\{1,\ldots,N\}\}$ then apply \cref{x-to-z} to the resulting set.
 \end{proof}
 
-For $I\subseteq\{1,\ldots,N\}$, let $x_I:=\{x_i:i\in I\}$, define $y_I$ and $z_I$ similarly, and define $G_I:=G[x_I\cup y_I\cup z_I]$.  We say that such a set $I$ is \emph{symmetric} if $\overline{v}\in V(G_I)$ for each $v\in V(G_I)$.
-
-\begin{lem}
-    If there exists a $k$-element symmetric set $I\subset\{1,\ldots,N\}$ such that $x_I\cup y_I$ is separated from $z_I$ with respect to $<$, then $H_d$ contains a rainbow of size $k^{c}$.
-\end{lem}
-
-\begin{proof}
-    Here are the steps in the proof:
-    \begin{compactenum}
-        \item Use pigeonhole to find $I_1\subseteq I$ of size at lest $k/2$ such that $x_i< y_i$ for each $i\in I_1$.
-
-        \item Use Dilworth's Theorem and the existence of each edge $x_ix_{\overline\imath}$ to find $I_2\subseteq I_1$ such that $x_{\{i\in I_2:i\le N/2\}}$ and $x_{\{i\in I_2:i\ge N/2\}}$ have the same order (where we match $x_i$ with $x_{\overline{\imath}}$).
-
-        \item Use Dilworth and the existence of the edge $x_iy_i$ to find $I_3\subseteq I_2$ such that $x_{I_2}$ and $y_{I_2}$ have the same ordering (where we match $x_i$ with $y_i$).
-
-        % \item Use Dilworth and the existence of the edge $z_iz_{\overline\imath}$ to find $I_4\subseteq I_3$ such that $z_{\{i\in I_3:i\le N/2\}}$ and $z_{\{i\in I_3:i\ge N/2\}}$ have the same order (where we match $z_i$ with $z_{\overline{\imath}}$).
-    \end{compactenum}
-    Now we're done.  Let $I_4':=\{i\in I_4:i\le N/2\}$ and let $\overline{I}_4':= I_4\setminus I_4'$.
-    If $y_{I_4'}$ and $z_{I_4'}$ don't contain a big rainbow then $y_{I_4}$ and $z_{I_4'}$ contain a big twist.  By Step~2 above, $x_{I_4'}$ and $y_{I_4'}$ have the same order.  By Step~1 above, $x_{I_4'}$ and $y_{\overline{I}_4'}$ have the same order.  This implies that the edge set $\{x_{\overline{\imath}}z_i:i\in I_4'\}$ form a big rainbow.
-\end{proof}
+% The lemmma stated in this comment is false.
+% For $I\subseteq\{1,\ldots,N\}$, let $x_I:=\{x_i:i\in I\}$, define $y_I$ and $z_I$ similarly, and define $G_I:=G[x_I\cup y_I\cup z_I]$.  We say that such a set $I$ is \emph{symmetric} if $\overline{v}\in V(G_I)$ for each $v\in V(G_I)$.
+%
+% \begin{lem}
+%     If there exists a $k$-element symmetric set $I\subset\{1,\ldots,N\}$ such that $x_I\cup y_I$ is separated from $z_I$ with respect to $<$, then $H_d$ contains a rainbow of size $k^{c}$.
+% \end{lem}
+%
+% \begin{proof}
+%     Here are the steps in the proof:
+%     \begin{compactenum}
+%         \item Use pigeonhole to find $I_1\subseteq I$ of size at lest $k/2$ such that $x_i< y_i$ for each $i\in I_1$.
+%
+%         \item Use Dilworth's Theorem and the existence of each edge $x_ix_{\overline\imath}$ to find $I_2\subseteq I_1$ such that $x_{\{i\in I_2:i\le N/2\}}$ and $x_{\{i\in I_2:i\ge N/2\}}$ have the same order (where we match $x_i$ with $x_{\overline{\imath}}$).
+%
+%         \item Use Dilworth and the existence of the edge $x_iy_i$ to find $I_3\subseteq I_2$ such that $x_{I_2}$ and $y_{I_2}$ have the same ordering (where we match $x_i$ with $y_i$).
+%
+%         % \item Use Dilworth and the existence of the edge $z_iz_{\overline\imath}$ to find $I_4\subseteq I_3$ such that $z_{\{i\in I_3:i\le N/2\}}$ and $z_{\{i\in I_3:i\ge N/2\}}$ have the same order (where we match $z_i$ with $z_{\overline{\imath}}$).
+%     \end{compactenum}
+%     Now we're done.  Let $I_4':=\{i\in I_4:i\le N/2\}$ and let $\overline{I}_4':= I_4\setminus I_4'$.
+%     If $y_{I_4'}$ and $z_{I_4'}$ don't contain a big rainbow then $y_{I_4}$ and $z_{I_4'}$ contain a big twist.  By Step~2 above, $x_{I_4'}$ and $y_{I_4'}$ have the same order.  By Step~1 above, $x_{I_4'}$ and $y_{\overline{I}_4'}$ have the same order.  This implies that the edge set $\{x_{\overline{\imath}}z_i:i\in I_4'\}$ form a big rainbow.
+% \end{proof}
 
 \begin{lem}
   For any $q$-queue layout $(<,\varphi)$  of $H_d$, there exists $I\subseteq\{1,\ldots,N/2\}$ and an integer $s\in\{1,\ldots,6\}$ such that:
@@ -288,10 +289,8 @@ For $I\subseteq\{1,\ldots,N\}$, let $x_I:=\{x_i:i\in I\}$, define $y_I$ and $z_I
 \end{obs}
 
 \begin{proof}
-The vertices in $I$ and $\overline{I}$ form a twist and a rainbow\todo{Be more precise}.
+The vertices in $I$ and $\overline{I}$ form a twist and a rainbow\todo{Be more precise}. \ldots
 \end{proof}
-
-
 
 \begin{obs}\label{cant_separate3}
     If there exists a set $I$ such that $x_I$, $y_I$ and $z_I$ are separated with respect to $<$, then $H_d$ contains a rainbow of size at least $\sqrt[4]{|I|}$.
@@ -369,8 +368,44 @@ What happens if we try to interleave $G_x$ and $G_z$ but leave $G_y$ separated? 
 % This gives an alternative way to do bipartite matchings that has lots of different edge lengths and small rainbows.  Maybe this can be used to find a queue layout of $H_d$?
 %
 
+\section{A shortcut}
+
+Let $X:=\{x_0,\ldots,x_{n-1}\}$, $Y:=\{y_0,\ldots,y_{n-1}\}$ and $Z:=\{z_0,\ldots,z_{n-1}\}$.  Let $<$ be a total order on $X\cup Y\cup Z$ where $X<Y<Z$ and, for each $0\le i<j< n$, $x_i<x_j$, $y_i<y_j$ and $z_i<z_j$.
+Take a tripartite graph $G:=(X,Y,Z,E)$ such that $G$ has an $s$-stack layout $(<,\varphi)$ and each of $G_{XY}:=G[X\cup Y]$, $G_{YZ}:=G[Y\cup Z]$ and $G_{XZ}:=G[X\cup Z]$ are bipartite 2-sided $\delta$-expanders.
+
+A result of Bourgain and Yehudahoff shows that such a $G$ exists width $s\in O(1)$.  That result is hard to understand. An easier construction, due to Alon and Roichman shows that if we just pick $k:=\lceil c(\delta)\log n\rceil$ random values $\ell_1,\ldots,\ell_k\in\{0,\ldots,n-1\}$, then the graph $G_{XY}$ with edge set $E(G_{XY})=\{(x_i,y_{(i+\ell_j)\bmod n}):i\in\{0,\ldots,n-1\},j\in\{1,\ldots,k\}\}$ is a $\delta$-expander.  It's easy to see that this ``shift-graph'' has a stack layout $(<,\varphi)$ using $s:=2k= O(\log n)$ stacks.  This will be good enough if we can prove that the queue number of $G$ is at least $n^\alpha$ for some fixed $\alpha>0$.  (The remark on Page~8 of the Alon-Roichman paper even considers the cyclic group $Z_n$, which is what we're using here.)
+
+The idea now is to show that any $q$-queue layout $(<',\varphi')$ of $G_{XY}$ is quite restricted.  Basically, that $X$ can be separated into $t:=O(q)$ groups $X_1,\ldots,X_t$ such that $X_1<'\cdots<'X_t$ and $<'$ essentially agrees with $<$ or $<'$ essentially reverses $<$ within each group $X_i$ (with the same decision for each $X_i$).  This would be good enough, since we can then argue as follows:
+\begin{enumerate}
+   \item Assume, without loss of generality that $<'$ essentially agrees with $<$.
+   \item To avoid a large rainbow in $G_{XY}$, $<'$ must essentially reverse $<$ on $Y$.
+   \item To avoid a large rainbow in $G_{XY}$, $<'$ must essentially agree with $<$ on $Z$.
+   \item But now $<'$ essentially agrees with $<$ or $X$ and $Z$, which forces a large rainbow in $G_{XZ}$.
+\end{enumerate}
 \bibliographystyle{plainurlnat}
 \bibliography{qn-vs-sn}
+
+
+\section{Starting Fresh}
+
+Let $A:=\{a_1,\ldots,a_n\}$ and $B:=\{b_1,\ldots,b\}$ be two disjoint sets and let $<$ be a total order over $A\cup B$ such that $a_1<\cdots<a_n<b_1\cdots<b_n$.  A \emph{$2$-sided $d$-monotone $(A,B)$-$(1+\epsilon)$-expander} is a bipartite graph $G$ with vertex set $V(G):=A\cup B$ such that
+\begin{compactenum}[(P1)]
+    \item $G$ has no $(d+1)$-rainbow with respect to $<$; and
+    \item For any $S\subset A$, $|N_G(S)\cap B|\ge\min\{n,(1+\epsilon)|S|\}$.
+\end{compactenum}
+
+\begin{thm}[Bourgain]\label{bourgain}
+    For any $\epsilon>0$, there exists an integer $d:=d(\epsilon)$ such that for any $n\in\N$ there exists a $2$-sided $d$-monotone $(A,B)$-$(1+\epsilon)$-expander.
+\end{thm}
+
+
+\begin{lem}
+    Let $G$ be a $2$-sided $d$-monotone $(A,B)$-$c$-expander given by \cref{bourgain} and let $<$ be a $q$-queue ordering of $G$. Then there exists a partition $\mathcal{P}$ of $\{1,\ldots,n\}$ such that
+    \begin{compactenum}[(i)]
+        \item for each $P\in\mathcal{P}$ and each $i,j\in P$, $i<j$ if and only if $a_i<a_j$; or
+        \item for each $P\in\mathcal{P}$ and each $i,j\in P$, $i<j$ if and only if $a_i>a_j$.
+    \end{compactenum}
+\end{lem}
 
 
 \end{document}
