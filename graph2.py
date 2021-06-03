@@ -13,25 +13,34 @@ def expander(a, b, d):
         edges.extend([(a[i], b[(i+1+s)%n]) for i in range(n)])
     return edges
 
+def matching(a, b):
+    n = len(a)
+    assert(n == len(b))
+    return [(a[i], b[i]) for i in range(n)]
+
 
 def graph(n, d):
-    edges = [(i,i+1) for i in range(n-1)]
-    edges.extend([(i, i+n) for i in range(n)])
-    edges.extend([(i+n, i+2*n) for i in range(n)])
-    edges.extend(expander(list(range(n)), list(range(3*n-1, 2*n-1, -1)), d))
+    edges = list()
+    a = list(range(n))
+    b = [x+n for x in a]
+    c = [x+2*n for x in a]
+    edges.extend(matching(a,b))
+    edges.extend(matching(b,c))
+    edges.extend(expander(a, c[::-1], d))
     return edges
 
 def dot_output(edges):
     print("graph{")
     for v,w in edges:
         print(" {} -- {};".format(v, w))
+    print("}")
 
 
 if __name__ == "__main__":
     n = 23
     d = 4
-    if len(sys.args) > 1:
-        n = int(args[1])
-    if len(sys.args) > 2:
-        d = int(args[2])
+    if len(sys.argv) > 1:
+        n = int(sys.argv[1])
+    if len(sys.argv) > 2:
+        d = int(sys.argv[2])
     dot_output(graph(n, d))
