@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+
+import sys
+import os
+
+
+
+def system(cmd):
+  print("E:", cmd)
+  os.system(cmd)
+
+if __name__ == "__main__":
+  if len(sys.argv) != 5:
+    print("Usage {} <n> <d> <q> <s>".format(sys.argv[0]))
+    sys.exit(-1)
+  n = int(sys.argv[1])
+  d = int(sys.argv[2])
+  q = int(sys.argv[3])
+  s = int(sys.argv[4])
+
+  solver = "treengeling"
+
+  system("bob -i=graph.dot -o=graph.dimacs -queues={}".format(q))
+  system("{} graph.dimacs > results.dimacs".format(solver))
+  print("="*60)
+  print("{}-queue layout".format(q))
+  print("="*60)
+  system("bob -i=graph.dot -result=results.dimacs -queues={}".format(q))
+
+
+  system("./graph2.py {} {} > graph.dot".format(n, d))
+  system("bob -i=graph.dot -o=graph.dimacs -stacks={}".format(s))
+  system("{} graph.dimacs > results.dimacs".format(solver))
+  print("="*60)
+  print("{}-stack layout".format(s))
+  print("="*60)
+  system("bob -i=graph.dot -result=results.dimacs -stacks={}".format(s))
