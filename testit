@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import random
 import sys
 import os
 
@@ -19,6 +19,9 @@ if __name__ == "__main__":
   s = int(sys.argv[4])
 
   solver = "treengeling"
+  # solver = "glucose"
+
+  system("./mixed.py {} {} > graph.dot".format(n, d))
 
   system("bob -i=graph.dot -o=graph.dimacs -queues={}".format(q))
   system("{} graph.dimacs > results.dimacs".format(solver))
@@ -28,7 +31,6 @@ if __name__ == "__main__":
   system("bob -i=graph.dot -result=results.dimacs -queues={}".format(q))
 
 
-  system("./graph2.py {} {} > graph.dot".format(n, d))
   system("bob -i=graph.dot -o=graph.dimacs -stacks={}".format(s))
   system("{} graph.dimacs > results.dimacs".format(solver))
   print("="*60)
