@@ -114,6 +114,70 @@
 
 \section{Introduction}
 
+A lemma of \citet{dujmovic.wood:stacks} states that, if queue-number is bounded by stack-number, then queue-number is bounded by a polynomial function of stack number. More precisely, if there exists a function $f:\N\to\N$ such that $\qn(G)\le f(\sn(G))$ for all graphs $G$ then there exists a constant $c$ such that $\qn(G)\in O((\sn(G))^c)$ for all graphs $G$.
+
+\begin{lem}\label{rainbow_alternative}
+    Let $M$ be a perfect matching with edge set $E(M):=\{s_it_i:i\in\{1,\ldots,n\}\}$ and let $<$ be a total order on $V(M)$.  Then
+    \begin{compactenum}[(i)]
+        \item $M$ contains a rainbow of size at least $q$ or
+        \item there exists $I\subset\{1,\ldots,n\}$, $|I|\ge k/(2q)$ such that $s_i < s_j$ if and only if $t_i< t_j$ for each $i,j\in I$.
+    \end{compactenum}
+\end{lem}
+
+\begin{proof}
+    Partition the edges of $M$ into two classes, those for which $a_i<b_i$ and those for which $a_i>b_i$.  Assume, without loss of generality that the first class has size at least $|M|/2$.  Next apply Dilworth's Theorem to the partial order $(\prec,\{1,\ldots,k\})$ in which $i\prec j$ if and only if $a_i<a_j$ and $b_i < b_j$.  Any antichain in $\prec$ is a rainbow and any chain in $\prec$ is the set $I$ in the second alternative.
+\end{proof}
+
+\begin{lem}\label{rainbow_alternative_paths}
+    Let $G$ be a graph consisting of $n$ vertex-disjoint paths $P_1,\ldots,P_n$, each of length $\ell$ and with $P_i$ beginning at $s_i$ and ending at $t_i$, for each $i\in\{1,\ldots,k\}$.  Then, for any $q$-queue layout $(<,\varphi)$ of $G$, there exists $J\subseteq\{1,\ldots,n\}$, $|J|\ge n/(2q)^\ell$ such that $s_i<s_j$ if and only if $t_i<t_j$ for each $i,j\in J$.
+\end{lem}
+
+\begin{proof}
+    The proof is by induction on $\ell$.  If $\ell=0$, then $s_i=t_i$ for each $i\in\{1,\ldots,n\}$ and the result is trivially true, by taking $J:=\{1,\ldots,n\}$.
+
+    If $\ell\ge 1$, then apply \cref{rainbow_alternative} to the matching $M$ with edge set $E(M):=\{s_is_i':i\in\{1,\ldots,k\}\}$, where $s_i'$ denotes the second vertex in $P_i$.  The fact that $(<,\varphi)$ is a $q$-queue layout rules out alternative \cref{rainbow_alternative}(i).  Therefore, let $I$, $|I|\ge k/(2q)$, be the set determined by \cref{rainbow_alternative}(ii).  For each $i\in I$, let $P'_i$ be the path obtained by removing $s_i$ from $P_i$ (so that $P_i'$ begins at $s_i'$ and ends at $t_i$).  Now apply the inductive hypothesis to the set of paths $\{P_i':i\in I\}$.  This gives a set $J\subseteq I$ of size $|J|\ge |I|/(2q)^{\ell-1}\ge n/(2q)^\ell$ for which $s_i' < s_j'$ if and only if $t_i < t_j$ for each $i,j\in J$.  By \cref{rainbow_alternative}(ii), $a_i < a_j$ if and only if $a_i' < a_j'$, for each $i,j\in I$.  By transitivity, for each $i\in K$, $s_i < s_j$ if and only if $t_i< t_j$, as required.
+\end{proof}
+
+Here is a blocked variant of the Erd\H{o}s-Szekeres Theorem that may or may not be true:
+\begin{lem}\label{block_erdos_szekeres}
+    Let $n:=cr^2$ for some integers $r$ and $c$ and let $\pi_1,\ldots,\pi_n$ be a permutation of $\{1,\ldots,n\}$.  Then there exists integers $1\le k_1<k_2<\cdots<k_r\le cr$ and  $i_1<i_2<\cdots< i_r$ such that
+    \begin{compactenum}[(i)]
+        \item $i_x\in \{(k_x-1)r+1,\ldots,k_xr\}$ for each $x\in\{1,\ldots,r\}$ and
+        \item $\pi_{i_1}<\pi_{i_2}<\cdots<\pi_{i_r}$ or  $\pi_{i_1}>\pi_{i_2}>\cdots>\pi_{i_r}$
+    \end{compactenum}
+\end{lem}
+
+
+Let $Q_d$ be the \emph{$d$-cube}, the graph with vertex set $V(Q_d):=\{0,\ldots,2^d-1\}$ and that contains the edge $xy$ if and only if the binary representation of $x$ and $y$ differ in exactly one bit.  For two graphs $G$ and $H$, the \emph{direct product} $G\times H$ is the graph whose vertex set is the cartesian product $V(G\times H):=V(G)\times V(H)$ and whose edge set and edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $x_1x_2\in E(G)$ and $y_1y_2\in E(H)$.
+
+\begin{lem}\label{routing}
+    For any $\alpha,\beta \ge 0$, there exists $r:=r(\alpha,\beta)$ and $\gamma:=\gamma(\alpha,\beta)$ such that the following is true:  Let $P:=p_0,\ldots,p_r$ be a path and let $R:=R(d,\alpha,\beta)$ be the supergraph of $Q_d\times P_r$ that also contains the edges of the path $(x,p_0),\ldots,(x,p_r)$ for each $x\in V(Q_d)$.  Let $S$ be a subset of $V(Q_d)$ with $|S|\ge 2^d/(\alpha d^{\beta})$.  Let $T=\{n-1-s: s\in S\}$.  Then $R$ contains $s\ge \lfloor \alpha 2^{\gamma d}\rfloor$ vertex-disjoint length-$r$ paths $P_1,\ldots,P_s$ such that,
+    \begin{compactenum}
+        \item for each $i\in\{1,\ldots,s\}$, $P_i$ begins at $(s_i,p_0)$ for some $s_i\in S$ and ends at $(t_1,p_r)$ some $t_i\in T$ and
+        \item for each $i,j\in\{1,\ldots,s\}$, $s_i < s_j$ if and only if $t_i < t_j$.
+    \end{compactenum}
+\end{lem}
+
+\begin{proof}
+    Induction on the dimension, with two cases.  Either the dimension is balanced, so we get a recurrence like $T(d,m)\ge 2T(d-1,m/3)$ or the dimension is unbalanced, so we get a recurrence like $T(n)=T(d-1,2n/3)$. The first one naturally resolves to a polynomial. The second one gives us a denser problem, which can only happen $O(\beta\log d+\log\alpha)=O(\beta)$ times.
+\end{proof}
+
+
+
+Let $c$ be the constant in \cref{block_erdos_szekeres}, rounded up to the next integer power of $2$ (so $c:=2^{\lceil\log_2 c'\rceil}$ where $c'$ is denoted by $c$ in the statement of \cref{block_erdos_szekeres}).  Let $r:=2^d$ for some positive integer $d$ and let $n:=cr$ where $c$ is the constant given by \cref{block_erdos_szekeres}.  Now we construct the following graph $G$ from the following pieces:
+\begin{enumerate}
+    \item $G$ contains the set of $n$ length-$2$ paths described by  \cref{rainbow_alternative_paths} for $\ell:=2$;
+    \item $G$ contains the graph $R(d+\log_2 c,c)$ described in \cref{routing};
+    \item For each $k\in\{0,\ldots,cr-1\}$ and each $i\in\{1,\ldots,r\}$, $G$ contains the edge with endpoints $(k,p_0)$ and $s_{kr+i}$; and
+    \item For each $k\in\{0,\ldots,cr-1\}$ and each $i\in\{1,\ldots,r\}$, $G$ contains the edge with endpoints $(k,p_r)$ and $t_{kr+i}$; and
+\end{enumerate}
+
+\bibliographystyle{plainurlnat}
+\bibliography{qn-vs-sn}
+\end{document}
+
+\section{Old Stuff}
+
 An old result of \citet[Theorem 8]{dujmovic.wood:stacks} shows that queue number is (polynomially) bounded by by stack number if and only if bipartite 3-stack graphs have bounded queue number.  Even forgetting the bipartite condition, this means we can restrict ourselves to graphs made up of three outerplanar graphs $G_1$, $G_2$, and $G_3$ having a common outer face $v_1,\ldots,v_n$.
 
 If we're trying to show that queue number is not bounded by stack number then we will need all three of these triangulations.  Why? Because two triangulations of $v_1,\ldots,v_n$ form a (Hamiltonian) planar graph.  We already know that any planar graph has queue number at most $49$.
