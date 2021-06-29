@@ -147,30 +147,78 @@ Here is a blocked variant of the Erd\H{o}s-Szekeres Theorem that may or may not 
     \end{compactenum}
 \end{lem}
 
+\textbf{Update:} It's not true, not even close.  A bad example can be created by starting with the sequence $s_1:=\langle 1,0,3,2\rangle$ and then repeatedly using the substitution that replaces $x$ with $4x+1, 4x, 4x+3, 4x+2$.  This gives a self-similar looking sequence that, if you look at any level of granularity, and take any consecutive subsequence of length $k$, you will only find a monotone subsequence of length $O(\sqrt{k})$. The are other variations as well. See the program \texttt{bad.py} for examples and a visualization.
 
 Let $Q_d$ be the \emph{$d$-cube}, the graph with vertex set $V(Q_d):=\{0,\ldots,2^d-1\}$ and that contains the edge $xy$ if and only if the binary representation of $x$ and $y$ differ in exactly one bit.  For two graphs $G$ and $H$, the \emph{direct product} $G\times H$ is the graph whose vertex set is the cartesian product $V(G\times H):=V(G)\times V(H)$ and whose edge set and edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $x_1x_2\in E(G)$ and $y_1y_2\in E(H)$.
 
 \begin{lem}\label{routing}
-    For any $\alpha,\beta \ge 0$, there exists $r:=r(\alpha,\beta)$ and $\gamma:=\gamma(\alpha,\beta)$ such that the following is true:  Let $P:=p_0,\ldots,p_r$ be a path and let $R:=R(d,\alpha,\beta)$ be the supergraph of $Q_d\times P_r$ that also contains the edges of the path $(x,p_0),\ldots,(x,p_r)$ for each $x\in V(Q_d)$.  Let $S$ be a subset of $V(Q_d)$ with $|S|\ge 2^d/(\alpha d^{\beta})$.  Let $T=\{n-1-s: s\in S\}$.  Then $R$ contains $s\ge \lfloor \alpha 2^{\gamma d}\rfloor$ vertex-disjoint length-$r$ paths $P_1,\ldots,P_s$ such that,
+    Let $d>0$ be an integer, let $n:=2^d$, let $1 \le m\le n$.
+    Then there exists $r:=r(n,m)\le \log(n/m)+O(\sqrt{d})$ such that the following is true:  Let $P:=p_0,\ldots,p_r$ be a path and let $R:=R(n,m)$ be the supergraph of $Q_d\times P_r$ that also contains the edges of the path $(x,p_0),\ldots,(x,p_r)$ for each $x\in V(Q_d)$.  Let $S$ be an $m$-element subsets of $V(Q_d)$ and let $T:=\{n-v-1:v\in S\}$.   Then $R$ contains $s\ge m/\log(n/m)^{O(\sqrt{d})}$ vertex-disjoint length-$r$ paths $P_1,\ldots,P_s$ such that,
     \begin{compactenum}
-        \item for each $i\in\{1,\ldots,s\}$, $P_i$ begins at $(s_i,p_0)$ for some $s_i\in S$ and ends at $(t_1,p_r)$ some $t_i\in T$ and
+        \item for each $i\in\{1,\ldots,s\}$, $P_i$ begins at $(s_i,p_0)$ for some $s_i\in S$ and ends at $(t_i,p_r)$ some $t_i\in T$ and
         \item for each $i,j\in\{1,\ldots,s\}$, $s_i < s_j$ if and only if $t_i < t_j$.
     \end{compactenum}
 \end{lem}
 
 \begin{proof}
-    Induction on the dimension, with two cases.  Either the dimension is balanced, so we get a recurrence like $T(d,m)\ge 2T(d-1,m/3)$ or the dimension is unbalanced, so we get a recurrence like $T(n)=T(d-1,2n/3)$. The first one naturally resolves to a polynomial. The second one gives us a denser problem, which can only happen $O(\beta\log d+\log\alpha)=O(\beta)$ times.
+  Treat the vertices of a hypercube $Q_d$ as binary strings and, for each $v\in V(Q_d)$ and $i\in\{0,\ldots,d-1\}$, let $v_i$ denote bit-$i$ of $v$.
+  Let $\epsilon:=1/\sqrt{d}$ to be defined shortly.
+  We say that $S$ is \emph{$i$-balanced} if $|\{v\in S:v_i=b\}|\ge(\tfrac{1-\epsilon}{2})|S|$ for each $b\in\{0,1\}$.  We say that $S$ is \emph{fully balanced} if $S$ is $i$-balanced for each $i\in\{0,\ldots,d-1\}$.
+  Observe that $S$ is $i$-balanced if and only if $T$ is $i$-balanced, so $S$ is balanced if and only if $T$ is balanced.\footnote{This is because of the bijection that takes $x\in S$ onto $x':=n-x-1$ in $T$. Since $n$ is power of $2$, $x'$ is obtained by flipping every bit in $x$.}
+
+  First we consider the case in which $S$ is fully balanced.\todo{Split this into a separate lemma.}
+  Let $k\le d$ and let $b:=b_{d-1},\ldots,b_{d-k}$ be an arbitrary binary string of length $k$.  Let $S_B:=\{v\in S:v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}$.  Since $S$ is balanced,
+  \[
+     |S_B|\ge \left(\tfrac{1-\epsilon}{2}\right)^k m  \ge 1
+  \]
+  provided that
+  \begin{align*}
+     k
+     & \le\frac{\log m}{\log(2/(1-\epsilon))} \\
+     & \le \frac{\log m}{\log(2(1+\epsilon))} \le \frac{\log m}{1+2\epsilon\log e} \\
+     & \le (1-4\epsilon\log e)\log m \\
+     & \le \log m - 4\epsilon\log e\log n &\text{(for $\epsilon < BLAH$)} \\
+     & = \log m - O(\sqrt{d}) \enspace .
+  \end{align*}
+  From this point on, we let $k:=\lfloor\log m - 4\epsilon\log e\log n\rfloor=\log m + O(\sqrt{d})$ and we set $r=d-k$.
+  Now we have
+  \[ d-k = \log n - k
+         \ge \log n - \log m + O(\sqrt{d})
+         = \log(n/m)+O(\sqrt{d}) \enspace .
+  \]
+  Since $S$ and $T$ are symmetric, the same argument implies that $T_B:=\{v\in T: v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}$ is non-empty.
+
+  This implies that the subgraph $R_B$ of $R$ induced by $\{v\in V(Q_d):v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}\times V(P_r)$ contains at least one vertex $s_B\in S$ and at least one vertex of $t_B\in T$.  The subgraph $R_B$ contains the direct product of $Q_{d-k}$ and $P_r$, so the diameter of $R_B$ is at most $r=d-k=\log(n/m)+O(\sqrt{d})$. Therefore, there is a length-$r$ path $P_B$ from $s_B$ to $t_B$ that remains entirely in $R_B$.  For two distinct $k$-bit strings $B$ and $B'$, $R_B$ and $R_{B'}$ are vertex-disjoint and therefore $P_B$ and $P_{B'}$ are vertex disjoint.  Furthermore, if $B< B'$, then $s_B< s_{B'}$ and $t_B < t_{B'}$. In this way, we obtain
+  $2^k = m/2^{O(\sqrt{d})}$ paths that satisfy the requirements of the lemma.
+
+  Next we consider the case in which $S$ is not balanced.  First let us upper bound the number of indices $i$ for which $S$ is $i$-unbalanced.  Suppose that $S$ is $i$-unbalanced for each $i$ in some $t$-element set $I:=\{i_1,\ldots,i_\alpha\}$.  This implies that $S$ contains a subset $S'$ of size
+  \[
+    m':=|S'|\ge \left(\tfrac{1+\epsilon}{2}\right)^\alpha m
+  \]
+  that is contained in a hypercube isomorphic to $Q_{d-\alpha}$ having $n':=2^{d-\alpha}$ vertices.  Clearly, $n'\ge m'$, and a calculation like the one above implies that $\alpha\in O(\sqrt{d}\log(n/m))$.  Therefore,
+  \[
+    m'
+      \ge \left(\tfrac{1+\epsilon}{2}\right)^\alpha m
+      \ge \frac{m}{2^\alpha} \ge \frac{m}{(n/m)^{O(\sqrt{d})}}
+  \]
+  Now let $T':=\{n-v-1:v\in S'\}$.  For each vertex $s\in S'$, construct a path $P_s:=(s_0,p_0),\ldots,(s_\alpha,p_\alpha)$ that begins at $(s_0,p_0):=(s,p_0)$ and, for each $j\in\{1,\ldots,\alpha\}$ moves from $(s_{j-1},p_{j-1}$ to $(s_j,p_j)$ by flipping bit $i_j$ of $s_{j-1}$.  Observe that, for two distinct $s,s'\in S'$, $P_s$ and $P_{s'}$ are vertex-disjoint and, $s< s'$ if and only if $s_r < s'_r$.  Now observe that the sets $S'_\alpha:=\{s_\alpha:s\in S\}$ and $T'$ are each contained in a subgraph $R'$ of $R$ that contains a strong product of $Q_{d-\alpha}$ and a path $P_{r-\alpha}$ of length $r-\alpha$  Observe, further, that $n'/m' \le n/m$.  Finally, the sets $S'_\alpha$ and $T'$ are fully balanced with respect to $R'$, so that we can use the result for fully balanced sets to find a set paths that satisify conditions of the lemma, with respect to the subgraph $R'$.  For each such path $P'_s$ that begins at $s_\alpha\in S'$ and ends at $t\in T'$, concatenating the paths $P_s$ and $P'_s$ gives a path that begins at $s\in S$ and ends at $t\in T$.  This gives a collection of paths that satisfies requirements of the lemma, with respect to $R$, and that has size at least
+  \[
+      \frac{m'}{2^{O(\sqrt{d})}} \ge \frac{m}{\log(n/m)^{O(\sqrt{d})}}
+      \enspace ,
+  \]
+  as required.
 \end{proof}
 
 
 
-Let $c$ be the constant in \cref{block_erdos_szekeres}, rounded up to the next integer power of $2$ (so $c:=2^{\lceil\log_2 c'\rceil}$ where $c'$ is denoted by $c$ in the statement of \cref{block_erdos_szekeres}).  Let $r:=2^d$ for some positive integer $d$ and let $n:=cr$ where $c$ is the constant given by \cref{block_erdos_szekeres}.  Now we construct the following graph $G$ from the following pieces:
-\begin{enumerate}
-    \item $G$ contains the set of $n$ length-$2$ paths described by  \cref{rainbow_alternative_paths} for $\ell:=2$;
-    \item $G$ contains the graph $R(d+\log_2 c,c)$ described in \cref{routing};
-    \item For each $k\in\{0,\ldots,cr-1\}$ and each $i\in\{1,\ldots,r\}$, $G$ contains the edge with endpoints $(k,p_0)$ and $s_{kr+i}$; and
-    \item For each $k\in\{0,\ldots,cr-1\}$ and each $i\in\{1,\ldots,r\}$, $G$ contains the edge with endpoints $(k,p_r)$ and $t_{kr+i}$; and
-\end{enumerate}
+
+% Let $c$ be the constant in \cref{block_erdos_szekeres}, rounded up to the next integer power of $2$ (so $c:=2^{\lceil\log_2 c'\rceil}$ where $c'$ is denoted by $c$ in the statement of \cref{block_erdos_szekeres}).  Let $r:=2^d$ for some positive integer $d$ and let $n:=cr$ where $c$ is the constant given by \cref{block_erdos_szekeres}.  Now we construct the following graph $G$ from the following pieces:
+% \begin{enumerate}
+%     \item $G$ contains the set of $n$ length-$2$ paths described by  \cref{rainbow_alternative_paths} for $\ell:=2$;
+%     \item $G$ contains the graph $R(d+\log_2 c,c)$ described in \cref{routing};
+%     \item For each $k\in\{0,\ldots,cr-1\}$ and each $i\in\{1,\ldots,r\}$, $G$ contains the edge with endpoints $(k,p_0)$ and $s_{kr+i}$; and
+%     \item For each $k\in\{0,\ldots,cr-1\}$ and each $i\in\{1,\ldots,r\}$, $G$ contains the edge with endpoints $(k,p_r)$ and $t_{kr+i}$; and
+% \end{enumerate}
 
 \bibliographystyle{plainurlnat}
 \bibliography{qn-vs-sn}
