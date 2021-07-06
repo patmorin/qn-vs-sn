@@ -70,6 +70,24 @@ def blow_up(a):
         c.extend([4*x + basic[i] for i in range(4)])
     return c
 
+def flip_order(a):
+    n = len(a)
+    if n <= 2:
+        return a
+    return flip_order(a[:n//2]) + flip_order(a[-1:n//2-1:-1])
+
+""" This produces the same result as repeated calls to blow_up([0,1,2,3]) """
+def double_flip_order(a):
+    n = len(a)
+    if n == 0 or n % 4 != 0:
+        return a
+    # order = [1, 0, 3, 2]
+    order = [2, 0, 3, 1]
+    rev = [1, -1, 1, -1]
+    subarrays = [ a[i*n//4:(i+1)*n//4] for i in range(4) ]
+    return sum([double_flip_order(subarrays[order[i]][::rev[order[i]]]) \
+                for i in range(4)], [])
+
 """ invert a permuation a:[0,...,n] -> [0,...,n] """
 def invert(a):
     inverter = sorted([(a[i], i) for i in range(len(a))])
@@ -77,6 +95,9 @@ def invert(a):
 
 def rainbow(n):
     return [(i, n-i-1) for i in range(n//2)]
+
+def twist(n):
+    return [(i, n//2+i) for i in range(n//2)]
 
 def hypercube(n):
     if n == 1:
@@ -139,7 +160,7 @@ def max_rainbow(g, a):
         i = lensperm[k]
         v, w = edges[i]
         b[i] = 1
-        for k2 in range(i):
+        for k2 in range(k):
             j = lensperm[k2]
             x, y = edges[j]
             if x < v and w < y and b[j] + 1 > b[i]:
@@ -154,7 +175,17 @@ def max_rainbow(g, a):
     return [g[x] for x in s]
 
 
+""" Return the parity of the number of one bits of n """
+def parity(n):
+    p = 0
+    while n != 0:
+        if n % 2:
+            p = 1-p
+        n //= 2
+    return p
 
+def parity_split(a):
+    return [x for x in a if parity(x) == 0] + [x for x in a if parity(x) == 1]
 
 
 if __name__ == "__main__":
@@ -163,9 +194,16 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         d = int(sys.argv[1])
 
-    a = [0]
-    for _ in range(d):
-        a = blow_up(a)
+    # a = [0]
+    # for _ in range(d):
+    #     a = blow_up(a)
+
+    a = list(range(2**d))
+    # a = parity_split(a)
+    a = double_flip_order(a)
+    # a = list(range(2**d))
+    # a = list(range(2**d))
+    # print(a)
     # a = list(range(4**d))
     # a = list(range(4**d // 2))
     # a += [4**d-x-1 for x in a]
@@ -173,7 +211,7 @@ if __name__ == "__main__":
 
     plt.plot(a)
     n = len(a)
-    print("max = {}, min = {}, n = {}".format(max(a), min(a), len(a)))
+    print("n = {}".format(max(a), min(a), len(a)))
     s = lis(a)
     print("LIS has length {}".format(len(lis(a))))
     # r = 2**d
@@ -186,17 +224,20 @@ if __name__ == "__main__":
     # g = alon_roitman(n, 1)
     # for g, c in [(skiplist(n), "black"), (hypercube(n), "red")]:
     # for g, c in [([(i, (i+1)%n) for i in range(n)], "black")]: \
-    for g, c in [(alon_roitman(n), "red")]:
-        for (y0, y1) in g:
-            x0 = ainv[y0]
-            x1 = ainv[y1]
-            draw_arc(x0, x1, c)
-        r = max_rainbow(g, ainv)
-        print("largest rainbow size is {}".format(len(r)))
-        for (y0, y1) in r:
-            x0 = ainv[y0]
-            x1 = ainv[y1]
-            draw_arc(x0, x1, "green", 2)
+    g = hypercube(n) + alon_roitman(n)
+    random.shuffle(g)
+    c = "red"
+    # for g, c in [(alon_roitman(n)+hypercube(n), "red")]:
+    for (y0, y1) in g:
+        x0 = ainv[y0]
+        x1 = ainv[y1]
+        draw_arc(x0, x1, c)
+    r = max_rainbow(g, ainv)
+    print("largest rainbow size is {}".format(len(r)))
+    for (y0, y1) in r:
+        x0 = ainv[y0]
+        x1 = ainv[y1]
+        draw_arc(x0, x1, "green", 2)
     plt.xlabel("i")
     plt.ylabel("pi[i]")
     plt.show()
