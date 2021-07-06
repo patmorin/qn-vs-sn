@@ -78,10 +78,9 @@
 
 \newcommand{\ellt}{{\lfloor\ell/2\rfloor}}
 
-\title{\MakeUppercase{Queue Number versus Stack Number}\thanks{This research was partly funded by NSERC.}}
+\title{\MakeUppercase{Queue number is not bounded by stack number}\thanks{This research was partly funded by NSERC.}}
 \author{Pat Morin%
-    \thanks{School of Computer Science, Carleton University}\quad
-    and Friends}
+    \thanks{School of Computer Science, Carleton University}}
 
 \date{}
 
@@ -100,7 +99,7 @@
 \maketitle
 
 \begin{abstract}
-    These are some notes I'm keeping on trying to show that queue number is (or isn't) bounded by stack number.
+    We describe a family $\mathcal{G}$ of graphs such that every graph in $\mathcal{G}$ has stack number at most $X$ but for every integer $k$, there exists a graph in $\mathcal{G}$ whose queue number is greater than $k$.  This resolves a problem posed by Heath, Leighton, and Rosenberg in 1992.
 \end{abstract}
 % \end{titlepage}
 
@@ -114,7 +113,102 @@
 
 \section{Introduction}
 
-A lemma of \citet{dujmovic.wood:stacks} states that, if queue-number is bounded by stack-number, then queue-number is bounded by a polynomial function of stack number. More precisely, if there exists a function $f:\N\to\N$ such that $\qn(G)\le f(\sn(G))$ for all graphs $G$ then there exists a constant $c$ such that $\qn(G)\in O((\sn(G))^c)$ for all graphs $G$.
+
+
+\section{Routing Through Expanders}
+\label{expander_construction}
+
+Let $d$ and $n$, be positive integers, $n$ a multiple of $4$, and let $\epsilon>0$. A  \emph{$d$-monotone $\epsilon$-expander of order $n$} is a bipartite graph $G$ with vertex set $V(G):=\{1,\ldots,2n\}$ and parts $A:=\{1,\ldots,n\}$ and $B:=\{n+1,\ldots,2n\}$ with the following properties:
+\begin{compactenum}[(i)]
+  \item ($d$-monotone): There is no $(d+1)$-element edge set $\{v_0w_0,\ldots,v_{d}w_d\}\subseteq E(G)$ such that $v_0<v_1<\cdots < v_d$ and $w_0 > w_1>\cdots>w_d$.
+  \item ($\epsilon$-expander): For any $S\subseteq\{1,\ldots,n\}$ with $|S|\le 3n/4$, $|N_G(S)|\ge (1+\epsilon)|S|$.
+\end{compactenum}
+
+Property~(ii) implies the following property that we will make use of.
+\begin{compactenum}[(i)]\setcounter{enumi}{2}
+  \item (non-shrinking): For any $S\subseteq\{1,\ldots,n\}$ with $|S|\ge 3n/4+1$, $|N_G(S)|\ge 3n/4+1$.
+\end{compactenum}
+To see why Property~(iii) follows from Property~(ii), observe that if $S$ is a counterexample to Property~(iii) then any $(3n/4)$-element subset $S'\subseteq S$ has $|N_G(S')|\le |N_G(S)| \le 3n/4 < (1+\epsilon)|S'|$, thereby contradicting Property~(ii).  We will make use of the following result of \cite{bourgain:X,bourgain.yehudahoff:X} (see also \citet{XX} for additional discussion.)
+
+\begin{thm}[Bourgain]\label{bourgain}
+    There exists absolute constants $\epsilon>0$ and $d>0$ such that for any $n\in\N$ there exists a  $d$-monotone $\epsilon$-expander of order $n$.
+\end{thm}
+
+We consider the following $(2r+1)n$-vertex graph $X_{n,r}$:
+\begin{itemize}
+  \item The vertices of $X$ are partitioned into $2r+1$ $n$-element sets $V_0,\ldots,V_{2r}$ and we let $\{v_{i,j}:j\in\{1,\ldots,n\}$ denote the elements of $v_i$.
+
+  \item for each $i\in\{1,\ldots,r\}$, the induced subgraph $X[V_{i-1}\cup V_i]$ is isomorphic to an $d$-monotone $\epsilon$-expander of order $n$, using the mapping that takes $v_{i-1,j}\mapsto j$ and $v_{i,j}\mapsto n+j$ for each $j\in\{1,\ldots,n\}$.
+
+  \item for each $i\in\{r,\ldots,2r-1\}$, the induced subgraph $X[V_{i+1}\cup V_i]$ is isomorphic to an $d$-monotone $\epsilon$-expander of order $n$, using the mapping that takes $v_{i+1,j}\mapsto j$ and $v_{i,j}\mapsto n+j$ for each $j\in\{1,\ldots,n\}$.
+\end{itemize}
+
+
+\begin{lem}
+  Let $\epsilon$ be defined as in \cref{bourgain}.
+  For any integers $k,p,n,r$ with $\epsilon k/2 \ge p$, $kp\le n$, $r\ge \log(n/k)/\log(1+\epsilon/2)$, the following statement about the graph $X:=X_{n,r}$ is true:
+
+  For any $k$-element subsets $S\subseteq V_0$ and $T\subseteq V_{2r}$, there exists $\epsilon k/2$ vertex-disjoint paths $P_1,\ldots,P_{\alpha k}$ each of length $2r$ each having an endpoint in $S$ and an endpoint in $T$.
+\end{lem}
+
+\begin{proof}
+The proof is just like the proof below.
+\end{proof}
+
+
+\begin{lem}[Now defunct]\label{x_graph}
+  Let $\epsilon$ be defined as in \cref{bourgain}.
+  For any integers $k,p,n,r$ with $\epsilon k/2 \ge p$, $kp\le n$, $r\ge \log(n/k)/\log(1+\epsilon/2)$, the following statement about the graph $X:=X_{n,r}$ is true:
+
+  For any pairwise disjoint $k$-element subsets $S_1,\ldots,S_p\subseteq V_0$ and $T_1,\ldots,T_p\subseteq V_{2r}$, the graph $X$ contains vertex-disjoint paths $P_1,\ldots,P_p$ each of length $2r$ and, for each $\ell\in\{1,\ldots,p\}$, $P_\ell$ has endpoints in $S_\ell$ and $T_\ell$.
+\end{lem}
+
+\begin{proof}
+  We will construct the paths $P_1,\ldots,P_p$ one at a time.  To construct the path $P_\ell$ after constructing $P_1,\ldots,P_{\ell-1}$, we let $\overline{V}:=\bigcup_{a=1}^{\ell-1} V(P_a)$ be the set of vertices that must be avoided by $P_\ell$.
+
+  Let $S_0':=S_\ell$.  For each $i\in\{1,\ldots,r\}$, define $S_i':=N_X(V_{i-1}')\cap V_i\setminus \overline{V}$.  Observe that, for each $v\in S_i'$, there exists a length-$i$ path $P_v$ from $v$ to some vertex in $S_0'=S_\ell$.  We claim that, for each $i\in\{0,\ldots,r\}$, $|S_i'|\ge \min\{n/2+1,(1+\epsilon/2)k\}$ and prove this claim by induction on $i$.  In the base case $i=0$, and the statement is easily verified since $|S_0'|=|S_\ell|=k=(1+\epsilon/2)^0k$.
+
+  Now suppose $i\in\{1,\ldots,r\}$.  If $|V_{i-1}'|\ge n/2+1$ then $|S_i'|\ge |V_{i-1}|\ge n/2+1$ and we are done.  Otherwise, $|V_{i-1}'|\le n/2$ and, since the graph $X[V_{i-1}\cup V_i]$ is isomorphic to an $\epsilon$-expander,  $|N_X(S_{i-1}')\cap V_i| \ge (1+\epsilon)|S_{i-1}'|\ge (1+\epsilon)(1+\epsilon/2)^{i-1}k$.  Furthermore,
+  \[
+    |S_i'| = |N_X(S_{i-1'})\cap V_i\setminus \overline{V}|
+      \ge |N_X(S_{i-1}')\cap V_i|-p
+      \ge (1+\epsilon)(1+\epsilon/2)^{i-1}k - p
+      \ge (1+\epsilon/2)^ik \enspace ,
+  \]
+  This implies that
+  \[
+    |S_r'|\ge \min\{n/2+1,(1+\epsilon/2)^rk\} = \min\{n/2+1,n\} = n/2+1
+  \]
+  since $r\ge \log(n/k)/\log(1+\epsilon/2)$.
+
+  A symmetric argument shows that there exists a set $T_r'\subseteq V_r$, $|T_r'|\ge n/2+1$ such that, for each $v\in T_r'$ there exists a length-$r$ path $Q_v$ from $v$ to some vertex in $T_\ell$.  Since $S_r',T_r'\subseteq V_r$ and $|S_r'|,|T_r'|\ge n/2+1$, $S_r'\cap T_r'$ is non empty.  Let $v$ be any vertex in $S_r'\cap T_r'$ and observe that the union of the two paths $P_v$ and $Q_v$ gives a length-$2r$ path $P_\ell$ from some vertex in $S_\ell$ to some vertex in $T_\ell$ that is vertex-disjoint from every path in $P_1,\ldots,P_{\ell-1}$.
+\end{proof}
+
+\section{The Counterexample Graph}
+
+Define the graph $Q_n$ as follows:
+
+\begin{enumerate}
+  \item $Q_{n,r}$ contains the graph $X_{n,r}$ defined in  \cref{expander_construction}, for a value $r$ to be defined later.
+  \item $Q_{n,r}$ contains an additional set $Y:=\{y_1,\ldots,y_n\}$ of $n$ vertices.
+  \item For each $i\in\{1,\ldots,n\}$, $Q_{n,r}$ contains the path $v_{0,i}y_iv_{2r,i}$.
+\end{enumerate}
+
+\begin{clm}
+  For any integers $n$ and $r$, $\sn(Q_{n,r}) \le 2d$.
+\end{clm}
+
+\begin{proof}
+  To obtain a $2d$ stack layout of $Q_n$, use the following total order:
+  \begin{compactenum}
+    \item $V_0 < V_1 <\cdots <V_r < Y$.
+    \item $y_n < y_{n-1}<\cdots < y_1$.
+    \item For even $i\in\{0,\ldots,2r\}$, $v_{i,0} < v_{i,1} < \cdots v_{i,n}$.
+    \item For odd $i\in\{1,\ldots,2r-1\}$, $v_{i,n}< v_{i,n-1} < \cdots v_{i,1}$.
+  \end{compactenum}
+  It is easy to verify that this produces a $2d$ stack layout.\todo{Draw picture and explain stack assignment.}
+\end{proof}
+
 
 \begin{lem}\label{rainbow_alternative}
     Let $M$ be a perfect matching with edge set $E(M):=\{s_it_i:i\in\{1,\ldots,n\}\}$ and let $<$ be a total order on $V(M)$.  Then
@@ -138,6 +232,79 @@ A lemma of \citet{dujmovic.wood:stacks} states that, if queue-number is bounded 
     If $\ell\ge 1$, then apply \cref{rainbow_alternative} to the matching $M$ with edge set $E(M):=\{s_is_i':i\in\{1,\ldots,k\}\}$, where $s_i'$ denotes the second vertex in $P_i$.  The fact that $(<,\varphi)$ is a $q$-queue layout rules out alternative \cref{rainbow_alternative}(i).  Therefore, let $I$, $|I|\ge k/(2q)$, be the set determined by \cref{rainbow_alternative}(ii).  For each $i\in I$, let $P'_i$ be the path obtained by removing $s_i$ from $P_i$ (so that $P_i'$ begins at $s_i'$ and ends at $t_i$).  Now apply the inductive hypothesis to the set of paths $\{P_i':i\in I\}$.  This gives a set $J\subseteq I$ of size $|J|\ge |I|/(2q)^{\ell-1}\ge n/(2q)^\ell$ for which $s_i' < s_j'$ if and only if $t_i < t_j$ for each $i,j\in J$.  By \cref{rainbow_alternative}(ii), $a_i < a_j$ if and only if $a_i' < a_j'$, for each $i,j\in I$.  By transitivity, for each $i\in K$, $s_i < s_j$ if and only if $t_i< t_j$, as required.
 \end{proof}
 
+\begin{clm}
+  For infinitely many values of $n$, $\qn(Q_{n,r})\ge f(n)$.
+\end{clm}
+
+\begin{proof}
+  Suppose, for the sake of contradiction, that $\qn(Q_{n,r}) \le q$ for all $n,r\in \N$ and (by rounding up, if necessary) that $q=2^a$ is a power of $2$.
+
+  We will begin by choosing $n$, $k$, and $p$ that are compatible with \cref{x_graph}.  Let $x$ be a positive integer whose value will be lower bounded later.  Let $n:=2^{x^2}$, let $p:=2^x$, let $k=n/q^2p=2^{x^2-x-2a}$,
+  and let $r:=\lceil(x+2a)/\log(1+\epsilon)\rceil$.
+
+
+
+  For all sufficiently large $x$,
+  \[
+    \epsilon k/2 = \epsilon 2^{x^2-x-2a-1} \ge 2^x = p \enspace .
+  \]
+  Next,
+  \[
+    kp = 2^{x^2-2a} \le 2^{x^2} = n \enspace .
+  \]
+  Finally,
+  \[
+    r = \left\lceil \frac{x+2a}{\log(1+\epsilon)}\right\rceil \ge \frac{x+2a}{\log(1+\epsilon)} = \frac{\log(n/k)}{\log(1+\epsilon)} \enspace .
+  \]
+  Thus, for all sufficiently large $x$, $n$, $k$, and $p$ satisfy the conditions of \cref{x_graph}.  Finally, for sufficiently large $x$,
+  \[
+    (2q)^{2r} = 2^{(a+1)\left\lceil\frac{x+2a}{\log(1+\epsilon)}\right\rceil}
+    <? 2^{x}
+  \]
+
+
+
+
+
+  Take $n$ be a power of $2$ such that $\sqrt{\log n}$ is an integer and $n\ge q^2 p$, where $p=2^{\sqrt{\log n}}$.  Then $k:=n/q^{2}p$ is also an integer since both the numerator and denominator are powers of $2$ and the numerator is not smaller than the denominator.
+
+
+  Choose any $n$ such that $p:=2^{\sqrt{\log n}}$ is an integer.
+
+  Let $(<,\varphi)$ be a $q$-queue layout of $Q_{n,r}$.
+  Apply \cref{rainbow_alternative_paths} to the set of paths $\{v_{0,i}y_iv_{2r,i}:i\in\{1,\ldots,n\}\}$ to obtain $\{i_1,\ldots,i_{kp}\}\subseteq\{1,\ldots,n\}$, with $k\ge n/q^2$ and labelled so that $x_{0,i_1}<x_{0,i_2}<\cdots<x_{0,i_k}$ (and therefore $x_{2r,i_1}<x_{2r,i_2}<\cdots<x_{2r,i_k}$).
+
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+A lemma of \citet{dujmovic.wood:stacks} states that, if queue-number is bounded by stack-number, then queue-number is bounded by a polynomial function of stack number. More precisely, if there exists a function $f:\N\to\N$ such that $\qn(G)\le f(\sn(G))$ for all graphs $G$ then there exists a constant $c$ such that $\qn(G)\in O((\sn(G))^c)$ for all graphs $G$.
+
+
 Here is a blocked variant of the Erd\H{o}s-Szekeres Theorem that may or may not be true:
 \begin{lem}\label{block_erdos_szekeres}
     Let $n:=cr^2$ for some integers $r$ and $c$ and let $\pi_1,\ldots,\pi_n$ be a permutation of $\{1,\ldots,n\}$.  Then there exists integers $1\le k_1<k_2<\cdots<k_r\le cr$ and  $i_1<i_2<\cdots< i_r$ such that
@@ -153,12 +320,15 @@ Let $Q_d$ be the \emph{$d$-cube}, the graph with vertex set $V(Q_d):=\{0,\ldots,
 
 \begin{lem}\label{routing}
     Let $d>0$ be an integer, let $n:=2^d$, let $1 \le m\le n$.
-    Then there exists $r:=r(n,m)\le \log(n/m)+O(\sqrt{d})$ such that the following is true:  Let $P:=p_0,\ldots,p_r$ be a path and let $R:=R(n,m)$ be the supergraph of $Q_d\times P_r$ that also contains the edges of the path $(x,p_0),\ldots,(x,p_r)$ for each $x\in V(Q_d)$.  Let $S$ be an $m$-element subsets of $V(Q_d)$ and let $T:=\{n-v-1:v\in S\}$.   Then $R$ contains $s\ge m/\log(n/m)^{O(\sqrt{d})}$ vertex-disjoint length-$r$ paths $P_1,\ldots,P_s$ such that,
+    Then there exists $r:=r(n,m)\le \log(n/m)+O(\sqrt{d})$ such that the following is true:  Let $P:=p_0,\ldots,p_r$ be a path and let $R:=R(n,m)$ be the supergraph of $Q_d\times P_r$ that also contains the edges of the path $(x,p_0),\ldots,(x,p_r)$ for each $x\in V(Q_d)$.  Let $S$ be an $m$-element subsets of $V(Q_d)$ and let $T:=\{n-v-1:v\in S\}$.   Then $R$ contains $s\ge m/(2n/m)^{O(\sqrt{d})}$ vertex-disjoint length-$r$ paths $P_1,\ldots,P_s$ such that,
     \begin{compactenum}
         \item for each $i\in\{1,\ldots,s\}$, $P_i$ begins at $(s_i,p_0)$ for some $s_i\in S$ and ends at $(t_i,p_r)$ some $t_i\in T$ and
         \item for each $i,j\in\{1,\ldots,s\}$, $s_i < s_j$ if and only if $t_i < t_j$.
     \end{compactenum}
 \end{lem}
+
+[Note that the preceding lemma is useful provided that $m \ge n/2^{o(\sqrt{d})}$.]
+
 
 \begin{proof}
   Treat the vertices of a hypercube $Q_d$ as binary strings and, for each $v\in V(Q_d)$ and $i\in\{0,\ldots,d-1\}$, let $v_i$ denote bit-$i$ of $v$.
@@ -167,7 +337,7 @@ Let $Q_d$ be the \emph{$d$-cube}, the graph with vertex set $V(Q_d):=\{0,\ldots,
   Observe that $S$ is $i$-balanced if and only if $T$ is $i$-balanced, so $S$ is balanced if and only if $T$ is balanced.\footnote{This is because of the bijection that takes $x\in S$ onto $x':=n-x-1$ in $T$. Since $n$ is power of $2$, $x'$ is obtained by flipping every bit in $x$.}
 
   First we consider the case in which $S$ is fully balanced.\todo{Split this into a separate lemma.}
-  Let $k\le d$ and let $b:=b_{d-1},\ldots,b_{d-k}$ be an arbitrary binary string of length $k$.  Let $S_B:=\{v\in S:v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}$.  Since $S$ is balanced,
+  Let $k\le d$ and let $B:=b_{d-1},\ldots,b_{d-k}$ be an arbitrary binary string of length $k$.  Let $S_B:=\{v\in S:v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}$.  Since $S$ is balanced,
   \[
      |S_B|\ge \left(\tfrac{1-\epsilon}{2}\right)^k m  \ge 1
   \]
@@ -188,8 +358,10 @@ Let $Q_d$ be the \emph{$d$-cube}, the graph with vertex set $V(Q_d):=\{0,\ldots,
   \]
   Since $S$ and $T$ are symmetric, the same argument implies that $T_B:=\{v\in T: v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}$ is non-empty.
 
-  This implies that the subgraph $R_B$ of $R$ induced by $\{v\in V(Q_d):v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}\times V(P_r)$ contains at least one vertex $s_B\in S$ and at least one vertex of $t_B\in T$.  The subgraph $R_B$ contains the direct product of $Q_{d-k}$ and $P_r$, so the diameter of $R_B$ is at most $r=d-k=\log(n/m)+O(\sqrt{d})$. Therefore, there is a length-$r$ path $P_B$ from $s_B$ to $t_B$ that remains entirely in $R_B$.  For two distinct $k$-bit strings $B$ and $B'$, $R_B$ and $R_{B'}$ are vertex-disjoint and therefore $P_B$ and $P_{B'}$ are vertex disjoint.  Furthermore, if $B< B'$, then $s_B< s_{B'}$ and $t_B < t_{B'}$. In this way, we obtain
+  This implies that the subgraph $R_B$ of $R$ induced by $\{v\in V(Q_d):v_{d-1},\ldots,v_{d-k}=b_{d-1},\ldots,b_{d-k}\}\times V(P_r)$ contains at least one vertex $s_B\in S$ and at least one vertex $t_B\in T$.  The subgraph $R_B$ contains the direct product of $Q_{d-k}$ and $P_r$, so the diameter of $R_B$ is at most $r=d-k=\log(n/m)+O(\sqrt{d})$. Therefore, there is a length-$r$ path $P_B$ from $s_B$ to $t_B$ that remains entirely in $R_B$.  For two distinct $k$-bit strings $B$ and $B'$, $R_B$ and $R_{B'}$ are vertex-disjoint and therefore $P_B$ and $P_{B'}$ are vertex disjoint.  Furthermore, if $B< B'$, then $s_B< s_{B'}$ and $t_B < t_{B'}$. In this way, we obtain
   $2^k = m/2^{O(\sqrt{d})}$ paths that satisfy the requirements of the lemma.
+
+  Observe that the number of paths obtained when $S$ is fully balanced is considerably greater than what the lemma requires. This fact will be used to reduce the case in which $S$ is not fully balanced to a smaller full balanced problem on a subgraph of $R$.
 
   Next we consider the case in which $S$ is not balanced.  First let us upper bound the number of indices $i$ for which $S$ is $i$-unbalanced.  Suppose that $S$ is $i$-unbalanced for each $i$ in some $t$-element set $I:=\{i_1,\ldots,i_\alpha\}$.  This implies that $S$ contains a subset $S'$ of size
   \[
@@ -203,7 +375,7 @@ Let $Q_d$ be the \emph{$d$-cube}, the graph with vertex set $V(Q_d):=\{0,\ldots,
   \]
   Now let $T':=\{n-v-1:v\in S'\}$.  For each vertex $s\in S'$, construct a path $P_s:=(s_0,p_0),\ldots,(s_\alpha,p_\alpha)$ that begins at $(s_0,p_0):=(s,p_0)$ and, for each $j\in\{1,\ldots,\alpha\}$ moves from $(s_{j-1},p_{j-1}$ to $(s_j,p_j)$ by flipping bit $i_j$ of $s_{j-1}$.  Observe that, for two distinct $s,s'\in S'$, $P_s$ and $P_{s'}$ are vertex-disjoint and, $s< s'$ if and only if $s_r < s'_r$.  Now observe that the sets $S'_\alpha:=\{s_\alpha:s\in S\}$ and $T'$ are each contained in a subgraph $R'$ of $R$ that contains a strong product of $Q_{d-\alpha}$ and a path $P_{r-\alpha}$ of length $r-\alpha$  Observe, further, that $n'/m' \le n/m$.  Finally, the sets $S'_\alpha$ and $T'$ are fully balanced with respect to $R'$, so that we can use the result for fully balanced sets to find a set paths that satisify conditions of the lemma, with respect to the subgraph $R'$.  For each such path $P'_s$ that begins at $s_\alpha\in S'$ and ends at $t\in T'$, concatenating the paths $P_s$ and $P'_s$ gives a path that begins at $s\in S$ and ends at $t\in T$.  This gives a collection of paths that satisfies requirements of the lemma, with respect to $R$, and that has size at least
   \[
-      \frac{m'}{2^{O(\sqrt{d})}} \ge \frac{m}{\log(n/m)^{O(\sqrt{d})}}
+      \frac{m'}{2^{O(\sqrt{d})}} \ge \frac{m}{(2n/m)^{O(\sqrt{d})}}
       \enspace ,
   \]
   as required.
