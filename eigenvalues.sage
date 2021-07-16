@@ -34,8 +34,10 @@ if __name__ == "__main__":
   if len(sys.argv) == 2:
     n = int(sys.argv[1])
   g = alon_roichman(n, min(n//2, 3*log2ceil(n)))
-  print("vertices = {}, edges = {}".format(n, len(g)))
   #g = cycle(n)
+  print("vertices = {}, edges = {}".format(n, len(g)))
+
+
   m = adjacency_matrix(g)
   #print_matrix(m)
   degrees = sorted(set([sum(row) for row in m]), reverse=True)
