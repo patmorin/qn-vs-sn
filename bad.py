@@ -144,7 +144,7 @@ def draw_arc(x0, x1, c = "black", lw=0.25):
     if x0 == x1:
         return
     x0, x1 = min(x0, x1), max(x0, x1)
-    res = 100
+    res = 100 # resolution for approximating a curve with lines
     xs = [x0+i*(x1-x0)/res for i in range(res+1)]
     ys = [math.sin(math.pi*(x-x0)/(x1-x0))*0.7*(x1-x0) for x in xs]
     plt.plot(xs, ys, color=c, lw=lw)
@@ -187,6 +187,8 @@ def parity(n):
 def parity_split(a):
     return [x for x in a if parity(x) == 0] + [x for x in a if parity(x) == 1]
 
+def odd_even_split(a):
+    return [x for x in a if x%2] + [x for x in a if not x%2]
 
 if __name__ == "__main__":
     #random.seed(0)   # for reproducibility
@@ -200,7 +202,11 @@ if __name__ == "__main__":
 
     a = list(range(2**d))
     # a = parity_split(a)
+    # print(a)
     a = double_flip_order(a)
+    # print(a)
+    # a = odd_even_split(a)
+    # print(a)
     # a = list(range(2**d))
     # a = list(range(2**d))
     # print(a)
@@ -211,7 +217,7 @@ if __name__ == "__main__":
 
     plt.plot(a)
     n = len(a)
-    print("n = {}".format(max(a), min(a), len(a)))
+    print("n = {}".format(len(a)))
     s = lis(a)
     print("LIS has length {}".format(len(lis(a))))
     # r = 2**d

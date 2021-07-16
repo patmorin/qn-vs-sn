@@ -120,7 +120,7 @@
 
 Let $d$ and $n$, be positive integers, $n$ a multiple of $4$, and let $\epsilon>0$. A  \emph{$d$-monotone $\epsilon$-expander of order $n$} is a bipartite graph $G$ with vertex set $V(G):=\{1,\ldots,2n\}$ and parts $A:=\{1,\ldots,n\}$ and $B:=\{n+1,\ldots,2n\}$ with the following properties:
 \begin{compactenum}[(i)]
-  \item ($d$-monotone): There is no $(d+1)$-element edge set $\{v_0w_0,\ldots,v_{d}w_d\}\subseteq E(G)$ such that $v_0<v_1<\cdots < v_d$ and $w_0 > w_1>\cdots>w_d$.
+  \item ($d$-monotone): The edges of $G$ can be partitioned into $d$ $M_1,\ldots,M_d$ such that, for any $i\in\{1,\ldots,d\}$ and any two edges $vw,xy\in M_i$, with $v,x\in A$ and $w,y\in B$, $v < x$ if and only if $w < y$.
   \item ($\epsilon$-expander): For any $S\subseteq\{1,\ldots,n\}$ with $|S|\le 3n/4$, $|N_G(S)|\ge (1+\epsilon)|S|$.
 \end{compactenum}
 
@@ -134,7 +134,7 @@ To see why Property~(iii) follows from Property~(ii), observe that if $S$ is a c
     There exists absolute constants $\epsilon>0$ and $d>0$ such that for any $n\in\N$ there exists a  $d$-monotone $\epsilon$-expander of order $n$.
 \end{thm}
 
-We consider the following $(2r+1)n$-vertex graph $X_{n,r}$:
+Using \cref{bourgain}, we construct the following $(2r+1)n$-vertex graph $X_{n,r}$:
 \begin{itemize}
   \item The vertices of $X$ are partitioned into $2r+1$ $n$-element sets $V_0,\ldots,V_{2r}$ and we let $\{v_{i,j}:j\in\{1,\ldots,n\}$ denote the elements of $v_i$.
 
@@ -143,46 +143,73 @@ We consider the following $(2r+1)n$-vertex graph $X_{n,r}$:
   \item for each $i\in\{r,\ldots,2r-1\}$, the induced subgraph $X[V_{i+1}\cup V_i]$ is isomorphic to an $d$-monotone $\epsilon$-expander of order $n$, using the mapping that takes $v_{i+1,j}\mapsto j$ and $v_{i,j}\mapsto n+j$ for each $j\in\{1,\ldots,n\}$.
 \end{itemize}
 
+\begin{lem}\label{expansion}
+  Let $\epsilon$ and $d$ be the values whose existence is the subject of \cref{bourgain}.  Let $k, x, r, n$ be positive integers such that $k\le n$, and $x\le \epsilon k/(2+\epsilon)\le n/4$.  Let $\overline{V}$ be a subset of $V(X_{n,r})$ such that $|\overline{V}\cap V_i|\le x$ for each $i\in\{0,\ldots,2r\}$ and let $S$ be a $k$-element subset of $V_0$.
 
-\begin{lem}
-  Let $\epsilon$ be defined as in \cref{bourgain}.
-  For any integers $k,p,n,r$ with $\epsilon k/2 \ge p$, $kp\le n$, $r\ge \log(n/k)/\log(1+\epsilon/2)$, the following statement about the graph $X:=X_{n,r}$ is true:
-
-  For any $k$-element subsets $S\subseteq V_0$ and $T\subseteq V_{2r}$, there exists $\epsilon k/2$ vertex-disjoint paths $P_1,\ldots,P_{\alpha k}$ each of length $2r$ each having an endpoint in $S$ and an endpoint in $T$.
+  Then, for each $i\in\{0,\ldots,r\}$, there exists a subset $S_i'\subseteq V_i\setminus\overline{V}$ of size $|S_i'|\ge \min\{n/2+1,(1+\epsilon/2)^i (k-x)\}$ such that $X_{n,r}-\overline{V}$ contains a length-$i$ path from each $v\in V_i'$ to some vertex in $S\setminus\overline{V}$.
 \end{lem}
 
 \begin{proof}
-The proof is just like the proof below.
-\end{proof}
+  \todo{Clean this up}
+  Let $S_0':= S\setminus\overline{V}$ and observe that $|S_0'|\ge |S|-x$.  For each $i\in\{1,\ldots,r\}$, define
+  $S_i':=N_X(S_{i-1}')\cap V_i\setminus \overline{V}$.
+  Observe that, for each $v\in S_i'$, $X_{n,r}-\overline{V}$ contains a length-$i$ path $P_v$ from $v$ to some vertex in $S_0'=S_{\ell}$.  We claim that, for each $i\in\{0,\ldots,r\}$,
+  $|S_i'|\ge \min\{n/2+1,(1+\epsilon/2)^i(k-x)\}$
+  and prove this claim by induction on $i$.  In the base case $i=0$, and the statement is easily verified since $|S_0'|=|S\setminus\overline{V}|\le k-x$
 
+  % \ell\ge (1-\beta)k=(1+\epsilon/2)^0(1-\beta)k$.
 
-\begin{lem}[Now defunct]\label{x_graph}
-  Let $\epsilon$ be defined as in \cref{bourgain}.
-  For any integers $k,p,n,r$ with $\epsilon k/2 \ge p$, $kp\le n$, $r\ge \log(n/k)/\log(1+\epsilon/2)$, the following statement about the graph $X:=X_{n,r}$ is true:
-
-  For any pairwise disjoint $k$-element subsets $S_1,\ldots,S_p\subseteq V_0$ and $T_1,\ldots,T_p\subseteq V_{2r}$, the graph $X$ contains vertex-disjoint paths $P_1,\ldots,P_p$ each of length $2r$ and, for each $\ell\in\{1,\ldots,p\}$, $P_\ell$ has endpoints in $S_\ell$ and $T_\ell$.
-\end{lem}
-
-\begin{proof}
-  We will construct the paths $P_1,\ldots,P_p$ one at a time.  To construct the path $P_\ell$ after constructing $P_1,\ldots,P_{\ell-1}$, we let $\overline{V}:=\bigcup_{a=1}^{\ell-1} V(P_a)$ be the set of vertices that must be avoided by $P_\ell$.
-
-  Let $S_0':=S_\ell$.  For each $i\in\{1,\ldots,r\}$, define $S_i':=N_X(V_{i-1}')\cap V_i\setminus \overline{V}$.  Observe that, for each $v\in S_i'$, there exists a length-$i$ path $P_v$ from $v$ to some vertex in $S_0'=S_\ell$.  We claim that, for each $i\in\{0,\ldots,r\}$, $|S_i'|\ge \min\{n/2+1,(1+\epsilon/2)k\}$ and prove this claim by induction on $i$.  In the base case $i=0$, and the statement is easily verified since $|S_0'|=|S_\ell|=k=(1+\epsilon/2)^0k$.
-
-  Now suppose $i\in\{1,\ldots,r\}$.  If $|V_{i-1}'|\ge n/2+1$ then $|S_i'|\ge |V_{i-1}|\ge n/2+1$ and we are done.  Otherwise, $|V_{i-1}'|\le n/2$ and, since the graph $X[V_{i-1}\cup V_i]$ is isomorphic to an $\epsilon$-expander,  $|N_X(S_{i-1}')\cap V_i| \ge (1+\epsilon)|S_{i-1}'|\ge (1+\epsilon)(1+\epsilon/2)^{i-1}k$.  Furthermore,
-  \[
-    |S_i'| = |N_X(S_{i-1'})\cap V_i\setminus \overline{V}|
-      \ge |N_X(S_{i-1}')\cap V_i|-p
-      \ge (1+\epsilon)(1+\epsilon/2)^{i-1}k - p
-      \ge (1+\epsilon/2)^ik \enspace ,
-  \]
+  Now suppose $i\in\{1,\ldots,r\}$.  If $|V_{i-1}'|\ge 3n/4+1$ then $|S_i'|\ge |V_{i-1}|-k\ge 3n/4-\ell+1$ and we are done.  Otherwise, $|V_{i-1}'|\le 3n/4$ and, since the graph $X[V_{i-1}\cup V_i]$ is isomorphic to an $\epsilon$-expander,  $|N_X(S_{i-1}')\cap V_i| \ge (1+\epsilon)|S_{i-1}'|\ge (1+\epsilon)(1+\epsilon/2)^{i-1}(1-\beta)k$.  Furthermore,
+  \begin{align*}
+    |S_i'| & = |N_X(S_{i-1'})\cap V_i\setminus \overline{V}| \\
+      & \ge |N_X(S_{i-1}')\cap V_i|-(\ell-1) \\
+      & \ge (1+\epsilon)(1+\epsilon/2)^{i-1}(1-\beta)k-\beta k \\
+      & = (1+\epsilon/2)^i(1-\beta)k + (\epsilon/2)(1+\epsilon/2)^{i-1}(1-\beta) k - \beta k \\
+      & \ge (1+\epsilon/2)^i(1-\beta)k + (\epsilon/2)(1-\beta) k - \beta k
+       & \text{(since $i\ge 1$)} \\
+      & = (1+\epsilon/2)^ik \enspace .
+  \end{align*}
   This implies that
   \[
-    |S_r'|\ge \min\{n/2+1,(1+\epsilon/2)^rk\} = \min\{n/2+1,n\} = n/2+1
+    |S_r'|\ge \min\{3n/4-\ell+1,(1+\epsilon/2)^rk\} = \min\{3n/4-\ell+1,n\} = 3n/4-\ell+1
   \]
   since $r\ge \log(n/k)/\log(1+\epsilon/2)$.
-
-  A symmetric argument shows that there exists a set $T_r'\subseteq V_r$, $|T_r'|\ge n/2+1$ such that, for each $v\in T_r'$ there exists a length-$r$ path $Q_v$ from $v$ to some vertex in $T_\ell$.  Since $S_r',T_r'\subseteq V_r$ and $|S_r'|,|T_r'|\ge n/2+1$, $S_r'\cap T_r'$ is non empty.  Let $v$ be any vertex in $S_r'\cap T_r'$ and observe that the union of the two paths $P_v$ and $Q_v$ gives a length-$2r$ path $P_\ell$ from some vertex in $S_\ell$ to some vertex in $T_\ell$ that is vertex-disjoint from every path in $P_1,\ldots,P_{\ell-1}$.
 \end{proof}
+
+\begin{lem}\label{menger}
+  Let $\epsilon, d, k, x, r, n$ and $\overline{V}$ be as in \cref{expansion} with the additional restriction that $r\ge\log(n/k)/\log(1+\epsilon/2)$. Let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then $X_{n,r}-\overline{V}$ contains a path $P$ of length $2r$ and with one endpoint in $V_0$ and one endpoint in $V_{2r}$.
+\end{lem}
+
+\begin{proof}
+  With the additional condition on $r$,
+  applying \cref{expansion} yields a set $S'_r\subseteq V_{r}$ of size at least $n/2+1$.  Using the symmetry between $S\subseteq V_0$ and $T\subseteq V_{2r}$, a symmetric application of \cref{expansion} gives a set $T'_r\subseteq V_{r}$ of size at least $n/2+1$.  Since $|V_r|=n$,  there exists some $v\in S'_r\cap T'_r$ such that $X_{n,r}-\overline{V}$ contains a path of length $r$ from some $u\in S\setminus X$ to $v$ and contains a path of length $r$ from $v$ to some $w\in T\setminus X$.  The concatenation of these two paths gives the desired path.
+\end{proof}
+
+\begin{lem}\label{large_flow}
+  Let $\epsilon, d, k, r, n$ be as in \cref{menger} and let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then $X_{n,r}$ contains $t:= \lfloor \epsilon k / (2+\epsilon)\rfloor$ vertex-disjoint paths $P_1,\ldots,P_{t}$ each of length $2r$ and each having an endpoint in $S$ and an endpoint in $T$.
+\end{lem}
+
+\begin{proof}
+  For each $\ell:=1,\ldots,t$ apply \cref{menger} with $\overline{V}:=\bigcup_{a=1}^{\ell-1} V(P_a)$ to find a path $P_\ell$ that is vertex-disjoint from $P_{1},\ldots,P_{\ell-1}$.  This works because $|\overline{V}\cap V_i|\le t$ which satisfies the requirements placed on $x:=t$ in the application of \cref{meet_in_middle}.
+\end{proof}
+
+\begin{lem}\label{large_crossing_flow}
+  Let $\epsilon, d, k, r, n$ be as in \cref{menger} and such that $p:=n/k$ is an integer and $p\le \epsilon k/(2+\epsilon)$. Let $S_1,\ldots,S_p\subseteq V_0$ and $T_1\ldots,T_p\subseteq V_{2r}$ each be $k$-element sets.  Then there exists $p$ vertex-disjoint paths $P_1,\ldots,P_{p}$ each of length $2r$ such that, for each $\ell\in\{1,\ldots,p\}$, $P_i$ has an endpoint in each of $S_i$ and $T_i$.
+\end{lem}
+
+\begin{proof}
+  The proof is the same as that of \cref{large_flow} except that we now use the fact that $p\le \epsilon k/(2+\epsilon)$.
+\end{proof}
+
+
+\begin{lem}\label{large_ordered_flow}
+  Let $\epsilon, d, k, r, n$ be as in \cref{menger} and let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then there exists $t:= \lfloor \epsilon k / (2+\epsilon)d^{2r}\rfloor$ vertex-disjoint paths $P_1,\ldots,P_{t}$, where, for each $\ell\in\{1,\ldots,t\}$, $P_\ell$ has endpoints $v_{0,a_\ell}$ and ends at $v_{2r,b_\ell}$ and, for each $\ell,\ell'\in\{1,\ldots,t\}$, $a_\ell < a_{\ell'}$ if and only if $b_\ell < b_\ell'$.
+\end{lem}
+
+\begin{proof}
+  Apply \cref{menger} and then partition the resulting set of paths into $d^{2r}$ sets, each of which is \emph{non-crossing}.  The largest of these subsets gives the result.
+\end{proof}
+
 
 \section{The Counterexample Graph}
 
@@ -193,6 +220,7 @@ Define the graph $Q_n$ as follows:
   \item $Q_{n,r}$ contains an additional set $Y:=\{y_1,\ldots,y_n\}$ of $n$ vertices.
   \item For each $i\in\{1,\ldots,n\}$, $Q_{n,r}$ contains the path $v_{0,i}y_iv_{2r,i}$.
 \end{enumerate}
+
 
 \begin{clm}
   For any integers $n$ and $r$, $\sn(Q_{n,r}) \le 2d$.
@@ -232,53 +260,67 @@ Define the graph $Q_n$ as follows:
     If $\ell\ge 1$, then apply \cref{rainbow_alternative} to the matching $M$ with edge set $E(M):=\{s_is_i':i\in\{1,\ldots,k\}\}$, where $s_i'$ denotes the second vertex in $P_i$.  The fact that $(<,\varphi)$ is a $q$-queue layout rules out alternative \cref{rainbow_alternative}(i).  Therefore, let $I$, $|I|\ge k/(2q)$, be the set determined by \cref{rainbow_alternative}(ii).  For each $i\in I$, let $P'_i$ be the path obtained by removing $s_i$ from $P_i$ (so that $P_i'$ begins at $s_i'$ and ends at $t_i$).  Now apply the inductive hypothesis to the set of paths $\{P_i':i\in I\}$.  This gives a set $J\subseteq I$ of size $|J|\ge |I|/(2q)^{\ell-1}\ge n/(2q)^\ell$ for which $s_i' < s_j'$ if and only if $t_i < t_j$ for each $i,j\in J$.  By \cref{rainbow_alternative}(ii), $a_i < a_j$ if and only if $a_i' < a_j'$, for each $i,j\in I$.  By transitivity, for each $i\in K$, $s_i < s_j$ if and only if $t_i< t_j$, as required.
 \end{proof}
 
-\begin{clm}
-  For infinitely many values of $n$, $\qn(Q_{n,r})\ge f(n)$.
-\end{clm}
 
-\begin{proof}
-  Suppose, for the sake of contradiction, that $\qn(Q_{n,r}) \le q$ for all $n,r\in \N$ and (by rounding up, if necessary) that $q=2^a$ is a power of $2$.
+\todo[inline]{We are still missing an ingredient to make all of this work.  We need to construct some auxilliary graph on $v_{0,1},\ldots,v_{0,n}$ that places some restrictions on the ordering of $v_{0,1},\ldots,v_{0,n}$.  Keep reading.}
 
-  We will begin by choosing $n$, $k$, and $p$ that are compatible with \cref{x_graph}.  Let $x$ be a positive integer whose value will be lower bounded later.  Let $n:=2^{x^2}$, let $p:=2^x$, let $k=n/q^2p=2^{x^2-x-2a}$,
-  and let $r:=\lceil(x+2a)/\log(1+\epsilon)\rceil$.
+In particular, it would be enough to find a graph that guarantees a sequence $i_1<\cdots<i_s$ of length $s\ge  n^\epsilon$ (\emph{long}) with $i_s-i_1 \le n^{\epsilon+o(1)}$ (\emph{dense}) such that $v_{0,i_1}<\cdots<v_{0,i_s}$ or $v_{0,i_1}>\cdots>v_{0,i_s}$ (\emph{monotone}). Then, by attaching separate copies of $Q_{n^{\epsilon},r}$ (for appropriately chosen $r$) to consecutive vertices we could then prove the existence of a big rainbow using \cref{large_ordered_flow}. Even if we can't guarantee this, it would be enough to guarantee it at some ``scale'' (where we divide indices by $2^p$ for some $p\in \{0,\ldots,\log n- O(\log\log n)\}$.
 
+One strategy I was thinking of was to attach a perfectly balanced binary tree with $v_{0,1},\ldots,v_{0,n}$ at its leaves. In this case, one can show that the number orderings that yield at $q$-queue layout is at most $O(q)^n=2^{O(n\log q)}$, which is much less than $n!=2^{O(n\log n)}$, so this greatly restricts the number of possible orderings.\footnote{Prove this by induction on the height of the binary tree.  Once the ordering of level $h-1$ is fixed, ordering level $h$ involves a rainbow matching with the right children of their parents $(2q)^{n/2}$, a rainbow matching with the left children of their parents $(2q)^{n/2}$, and $4q$-way merging of the resulting sequences, not more than $(4q)^n$.  This leads to a product of the form $\prod_{i=0}^{\log_2 n} 2^{O(2^i\log q)}=2^{O(n)\log q}$.}  That, by itself isn't quite enough because it allows for the recursive layout obtained by expanding the sequence $1032$.  This layout, which can be visualized using the program \verb+bad.py+ has no monotone subsequence of length $\omega(\sqrt{n})$ and this is also true if one considers any consecutive $k$-element subset of the indices (such such a subset has a longest monotone subsequence of length $O(\sqrt{k})$).
 
+To foil this layout, we could also put a ``rainbow hypercube'' on $v_{0,1},\ldots,v_{0,n}$, so that the recursive layout would create a rainbow of size $n/4$ unless we (say) reverse groups $1$ and $3$.  Denote this by $\overline{1}0\overline{3}2$.  This is a valid layout whose maximum rainbow size is $O(\log n)$, which is also the stack number of the rainbow hypercube, so this works.  But this only works by accident because the binary tree and rainbow hypercube match up so nicely, (there are no edges between groups $0$ and $2$ and no edges between groups $1$ and $3$).
 
-  For all sufficiently large $x$,
-  \[
-    \epsilon k/2 = \epsilon 2^{x^2-x-2a-1} \ge 2^x = p \enspace .
-  \]
-  Next,
-  \[
-    kp = 2^{x^2-2a} \le 2^{x^2} = n \enspace .
-  \]
-  Finally,
-  \[
-    r = \left\lceil \frac{x+2a}{\log(1+\epsilon)}\right\rceil \ge \frac{x+2a}{\log(1+\epsilon)} = \frac{\log(n/k)}{\log(1+\epsilon)} \enspace .
-  \]
-  Thus, for all sufficiently large $x$, $n$, $k$, and $p$ satisfy the conditions of \cref{x_graph}.  Finally, for sufficiently large $x$,
-  \[
-    (2q)^{2r} = 2^{(a+1)\left\lceil\frac{x+2a}{\log(1+\epsilon)}\right\rceil}
-    <? 2^{x}
-  \]
+To foil that, I was thinking of using an Alon-Roichman expander (bipartite or with the halves merged, possibly even a hypercube-style hierarchy of bipartite expanders), which seems very unlikely to allow that kind of layout.  In fact, even forgetting about the binary tree, it seems like any $q$-queue layout of a bipartite Alon-Roichman expander with parts $x_1,\ldots,x_{n/2}$ and $y_{n/2},\ldots,y_{1}$ must have a long dense monotone sequence.   The main intuition behind this would be to suppose that $x_1,\ldots,x_{n/2}$ contain no long dense monotone subsequence.  This means that $x_1,\ldots,x_{n/2}$ has a very fancy ordering and (by including each edge $x_iy_{n/2-i+1}$) $y_{n/2},\ldots,y_{1}$ must also kind of respect this ordering.  (It comes from a set of $2^{O(n\log q)}$ possible orderings.)  But the Alon-Roichman expander contains many matchings, so there are $O(\log n)$ values of $s$ such that $y_{n/2-s},\ldots,y_{1-s}$ must also kind of respect that ordering.   Somehow, in a way that I haven't yet figured out, this seems to only be possible if the ordering has long dense monotone sequences.
+
+The most obvious ordering that works is $x_1<\cdots<x_{n/2}$, but others are possible. The standard example showing the tightness of Erd\H{o}s-Szekeres also works.  Anything that involves splitting into blocks of roughly equal length and reversing all blocks also works.  And, of course, anything that involves a few rounds of arbitrary $2$-colouring and then splitting the order based on colours also works.  But these all lead to long dense increasing sequences.  (For example, using blocks of size $n^{o(1)}$ leaves the obvious sequence.  Using blocks of size $n^{\Omega(1)})$ does too.
 
 
-
-
-
-  Take $n$ be a power of $2$ such that $\sqrt{\log n}$ is an integer and $n\ge q^2 p$, where $p=2^{\sqrt{\log n}}$.  Then $k:=n/q^{2}p$ is also an integer since both the numerator and denominator are powers of $2$ and the numerator is not smaller than the denominator.
-
-
-  Choose any $n$ such that $p:=2^{\sqrt{\log n}}$ is an integer.
-
-  Let $(<,\varphi)$ be a $q$-queue layout of $Q_{n,r}$.
-  Apply \cref{rainbow_alternative_paths} to the set of paths $\{v_{0,i}y_iv_{2r,i}:i\in\{1,\ldots,n\}\}$ to obtain $\{i_1,\ldots,i_{kp}\}\subseteq\{1,\ldots,n\}$, with $k\ge n/q^2$ and labelled so that $x_{0,i_1}<x_{0,i_2}<\cdots<x_{0,i_k}$ (and therefore $x_{2r,i_1}<x_{2r,i_2}<\cdots<x_{2r,i_k}$).
-
-
-\end{proof}
-
-
-
+% \begin{clm}
+%   For infinitely many values of $n$, $\qn(Q_{n,r})\ge f(n)$.
+% \end{clm}
+%
+% \begin{proof}
+%   Suppose, for the sake of contradiction, that $\qn(Q_{n,r}) \le q$ for all $n,r\in \N$ and (by rounding up, if necessary) that $q=2^a$ is a power of $2$.
+%
+%   We will begin by choosing $n$, $k$, and $p$ that are compatible with \cref{x_graph}.  Let $x$ be a positive integer whose value will be lower bounded later.  Let $n:=2^{x^2}$, let $p:=2^x$, let $k=n/q^2p=2^{x^2-x-2a}$,
+%   and let $r:=\lceil(x+2a)/\log(1+\epsilon)\rceil$.
+%
+%
+%
+%   For all sufficiently large $x$,
+%   \[
+%     \epsilon k/2 = \epsilon 2^{x^2-x-2a-1} \ge 2^x = p \enspace .
+%   \]
+%   Next,
+%   \[
+%     kp = 2^{x^2-2a} \le 2^{x^2} = n \enspace .
+%   \]
+%   Finally,
+%   \[
+%     r = \left\lceil \frac{x+2a}{\log(1+\epsilon)}\right\rceil \ge \frac{x+2a}{\log(1+\epsilon)} = \frac{\log(n/k)}{\log(1+\epsilon)} \enspace .
+%   \]
+%   Thus, for all sufficiently large $x$, $n$, $k$, and $p$ satisfy the conditions of \cref{x_graph}.  Finally, for sufficiently large $x$,
+%   \[
+%     (2q)^{2r} = 2^{(a+1)\left\lceil\frac{x+2a}{\log(1+\epsilon)}\right\rceil}
+%     <? 2^{x}
+%   \]
+%
+%
+%
+%
+%
+%   Take $n$ be a power of $2$ such that $\sqrt{\log n}$ is an integer and $n\ge q^2 p$, where $p=2^{\sqrt{\log n}}$.  Then $k:=n/q^{2}p$ is also an integer since both the numerator and denominator are powers of $2$ and the numerator is not smaller than the denominator.
+%
+%
+%   Choose any $n$ such that $p:=2^{\sqrt{\log n}}$ is an integer.
+%
+%   Let $(<,\varphi)$ be a $q$-queue layout of $Q_{n,r}$.
+%   Apply \cref{rainbow_alternative_paths} to the set of paths $\{v_{0,i}y_iv_{2r,i}:i\in\{1,\ldots,n\}\}$ to obtain $\{i_1,\ldots,i_{kp}\}\subseteq\{1,\ldots,n\}$, with $k\ge n/q^2$ and labelled so that $x_{0,i_1}<x_{0,i_2}<\cdots<x_{0,i_k}$ (and therefore $x_{2r,i_1}<x_{2r,i_2}<\cdots<x_{2r,i_k}$).
+%
+%
+% \end{proof}
+%
+%
+%
 
 
 
