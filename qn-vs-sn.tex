@@ -274,6 +274,122 @@ To foil that, I was thinking of using an Alon-Roichman expander (bipartite or wi
 The most obvious ordering that works is $x_1<\cdots<x_{n/2}$, but others are possible. The standard example showing the tightness of Erd\H{o}s-Szekeres also works.  Anything that involves splitting into blocks of roughly equal length and reversing all blocks also works.  And, of course, anything that involves a few rounds of arbitrary $2$-colouring and then splitting the order based on colours also works.  But these all lead to long dense increasing sequences.  (For example, using blocks of size $n^{o(1)}$ leaves the obvious sequence.  Using blocks of size $n^{\Omega(1)})$ does too.
 
 
+
+% \section{Background: Alon-Roichman}
+%
+% Let $n$ be a positive integer and $d:=\lceil\log_2 n\rceil$.  Let $G_{n,d}$ be a graph with $V(G_{n,d}):=\{1,\ldots,n-1\}$ and whose edges are obtained by choosing $d$ elements $s_1,\ldots,s_d$ uniformly at random in $\{0,\ldots,n-1\}$ taking $E(G_{n,d})$ to be the union of $d$ perfect matchings $M_1,\ldots,M_d$, where $M_i:=\{(x, (x+s_i)\bmod n): x\in\{0,\ldots,n-1\}\}$.
+%
+% A theorem of Alon and Roichman shows that there exists an absolute constant $\epsilon > 0$ such that, with high probability, $G_{n,d}$ is a $(1+\epsilon)$-expander:  For any $S\subseteq V(G_{n,d})$ of size at most $n/2$, $|N_{G_{n,d}}(S)|\ge \epsilon|S|$.
+
+\section{A Flattened Expander}
+
+It looks like all of this is really boils down to proving that a certain flattened version of an expander has large queue number.  Specifically, consider the graph obtained by starting with a $2n$-vertex $d$-monotone bipartite $(1+\epsilon)$-expander $X$ having parts $A:=\{1,\ldots,n\}$ and $B:=\{n+1,\ldots,2n\}$ and then identifying $v$ and $2n-v+1$ into a single vertex $v$ for each $i\in\{1,\ldots,n\}$.  This process may introduce self-loops, which we eliminate.  This process may also introduct pairs of parallel edges, of which we eliminate one copy.  However, for convenience we still associate each edge $vw$ of $G$ with a single edge $vw'$ of $X$.  We will use the convention of writing an edge of $G$ as $vw$ where $vw'$ is the edge of $X$ that corresponds to $vw$.
+
+\begin{lem}\label{partition_into_rainbows}
+  The graph $G$ has a $2d$-stack layout $\mathcal{S}:=(<,\varphi)$ such that, for any two edges $vw,xy\in E(G)$, $\varphi(vw)=\varphi(xy)$ if and only if $vw$ and $xy$ nest with respect to $<$.
+\end{lem}
+
+\begin{proof}
+  The ordering $<$ is the standard total order on the integers $V(G):=\{1,\ldots,n\}$. Each edge $vw$ of $G$ corresponds to an edge $vw'$ of the bipartite expander $X$ with $v\in A$ and $w'=2n-w+1\in B$.  The edge $vw'$ belongs to a matching $M_i$ for some $i\in\{1,\ldots,d\}$.  If $v < w$ then we assign $vw$ to the stack $\varphi(vw):=i$.  If $v > w$ then we assign $vw$ to the stack $\varphi(vw)=d+i$.
+
+  Observe that $\varphi$ is a proper edge colouring of $G$; if $\varphi(vw)=\varphi(xy)$ for two distinct edges $vw$ and $xy$ then $vw$ adn $xy$ are disjoint, i.e., $\{v,w\}\cap\{x,y\}=\emptyset$.  Therefore, all that remains is to show that any two disjoint edges $vw$ and $xy$ with $\varphi(vw)=\varphi(xy)$ nest.  Let  $i:=\varphi(vw)=\varphi(xy)$, so the edges $vw$ and $xy$ correspond to two edges $vw',xy'\in M_i$ with $w'=2n-w+1$ and $y'=2n-y+1$.  We may assume, without loss of generality, that $v<x$.  The $d$-monotonicity of $X$ implies that $w' < y'$ and therefore $y < w$.  We may also assume, without loss of generality, that $v < w$, which implies $\varphi(vw)=i\in\{1,\ldots,d\}$.  Since $\varphi(xy)=i$ this implies that $x < y$.  Thus, we have $v < x < y < w$ so $vw$ and $xy$ nest.
+\end{proof}
+
+Let $\mathcal{S}:=(<,\varphi)$ be the $2d$-stack layout of $G$ guaranteed by \cref{partition_into_rainbows}.  We now consider a hypothetical $q$-stack layout $\mathcal{Q}:=(<',\rho)$ of $G$ and determine some of the properties it must have.
+
+Define the partial order $(\prec,V(G))$ in which $v\prec w$ if and only if $v < w$ and $v <' w$.  Let $V_1,\ldots,V_k$ be a partition of $V(G)$ into the minimum possible number of chains with respect to $\prec$.  By Dilworth's Theorem, the value of $k$ is the size of the longest antichain in $V(G)$.
+
+\begin{lem}\label{few_edges_between_sets}
+  Let $A$ and $B$ be two (not necessarily disjoint) subsets of $V(G)$, each of which forms a chain with respect to $\prec$.  Then $e_G(A,B)\le 8qd$.
+\end{lem}
+
+\begin{proof}
+  Suppose, for the sake of contradiction, that $G$ contains $r > 8qd$ edges each having one endpoint in each of $A$ and $B$.  Without loss of generality, we may assume that at least $r/2$ of these edges have their first endpoint in $A$ and their second endpoint in $B$.\footnote{Recall that we treat edges of $G$ as ordered pairs whose order is determined by the corresponding edge in the bipartite graph $X$.}  By the pigeonhole principle at $r/4d>2q$ of these edges are assigned to a common stack, $\alpha$, of $\mathcal{S}$.  That is, $G$ contains a set of edges $M:=\{v_iw_i:i\in\{1,\ldots,v_{2q+1}\}\}$ such that $\varphi(v_iw_i)=\alpha$ for each $i\in\{1,\ldots,2q+1\}$.  Since all these edges are assigned to stack $\alpha$, the edges of $M$ are pairwise nesting with respect to $<$, so $v_1<\cdots<v_{2q+1} < w_{2q+1}<\cdots<w_1$.  Since each of $A$ and $B$ are chains with respect to $\prec$, this implies that $v_1<'\cdots<'v_{2q+1}$ and that $w_{2q+1}<'\cdots<'w_{1}$.  But this  contradicts the assumption that $\mathcal{Q}$ is a $q$-queue layout.\todo{Justify this.}
+\end{proof}
+
+
+% \begin{lem}\label{large_antichain}
+%   The partial order $(\prec,V(G))$ contains an antichain of size $k\ge \sqrt{(d-2)n/32qd}$.
+% \end{lem}
+%
+% \begin{proof}
+%   We bound $k$ by counting $E(G)$ in two different ways.
+%
+%   The number of edges in the bipartite expander $X$ is at least $dn/2$.\todo{Add this to the section on Bourgain.}  At most $n$ of these become self-loops that are eliminated in $G$, leaving at least $(d-2)n/2$ edges.  The process of eliminating one from each pair of parallel edges therefore leaves at least $(d-2)n/4$ edges in $G$.
+%
+%   By Dilworth's Theorem, the size $k$ of the largest antichain in $(\prec,V(G))$ is equal to the number $k$ of sets in the minimum partition $V_1,\ldots,V_k$ of $V(G)$ into chains.  By \cref{few_edges_between_sets}, the number of edges in $G$ is at most $8k^2qd$.
+%
+%   In summary,
+%   \[        (d-2)n/4 \le |E(G)| \le 8k^2qd \enspace .   \]
+%   Isolating $k^2$ then yields $k^2 \ge (d-2)n/32qd$, as required.
+% \end{proof}
+%
+% Next we observe that, since queue layouts are symmetric with respect to reversing orders, \cref{large_antichain,few_edges_between_sets} yield the following corollary:
+%
+% \begin{cor}\label{large_chain}
+%   The partial order $(\prec,V(G))$ contains a chain of size $x \ge \sqrt{(d-2)n/32qd}$.
+% \end{cor}
+
+\begin{lem}\label{chain_antichain}
+  If $\lambda>q$ and $\mu>q$ are the lengths of the longest chain and antichain, respectively, in the poset $(\prec,V(G))$, then  $\lambda \in \Omega(\mu/q)$ and $\mu\in\Omega(\lambda/q)$.
+\end{lem}
+
+\begin{proof}
+  We will show that $\mu\in\Omega(\lambda/q)$. A symmetric argument establishes that $\lambda\in\Omega(\mu/q)$.  Let $C$ be a chain of size $\lambda$.  Then $\Omega(d\lambda)$ edges of $G$ have at least one endpoint in $C$.  By \cref{few_edges_between_sets}, at most $8dq$ of these edges have both endpoints in $C$, so $\Omega(d(\lambda-q))$ edges have exactly one endpoint in $C$.
+
+  For each $i,j\in\{1,\ldots,d\}\times\{1,\ldots,q\}$, let $E_{i,j}$ be the subset of $E(G)$ consisting of only those edges $e$ with exactly one endpoint in $C$, with $\varphi(e)=i$ and with $\rho(e)=j$.  By the Pigeonhole principle, there is at least one set $E_{i,j}$ with $|E_{i,j}|=\Omega(d(\lambda-q)/dq) = \Omega(\lambda/q)$.  The endpoints of thise set must be partitioned into two antichains, at least one of which has size $\Omega(\lambda/q)$.  Therefore, $\mu\in\Omega(\lambda/q)$.
+\end{proof}
+
+
+Note that, by Dilworth's Theorem $\mu\lambda \ge n$, so one of $\mu$ or $\lambda$ is at least $\sqrt{n}$ and, by \cref{chain_antichain} the other is $\Omega(\sqrt{n}/q)$.
+
+\begin{cor}
+  $\mu, \lambda \in \Omega(\sqrt{n}/q)$.
+\end{cor}
+
+So far we haven't made use of the expander properties that $G$ inherits from $X$!  In fact, when we restrict ourselves to vertex subsets that can be partitioned into a small number of chains/antichains we get an expansion property for free.  If $S$ can be partitioned in $k$ chains, then it contains at most $O(k^2qd)$ internal edges.  But the total degree of $S$ is around $d|S|$, so this means there must be $\Omega(d(|S|-k^2q))$ edges with exactly one endpoint in $S$ and therefore $|N_G(S)| = \Omega(|S|-k^2q)$.  This is a very strong expansion property when $|S|\in\omega(k^2q)$.
+
+Of course, we can avoid \emph{really long} chains (of length $n^{1-o(1)})$ using the layers of expanders in the previous section, but there's still a big gap between $n^{1-o(1)}$ and $\Omega(n^{1/2}/q)$.
+
+Another observation here is that we can discount the case in which $V(G)$ can be partitioned into $O(n^{1-z})$ chains that are linearly separated.  That's because in this case, we can collapse each chain and get a graph with $O(n^{1-z})$ vertices that still has $\Omega(n)$ edges.  This graph is too dense to have small queue number.
+
+In fact, the graph obtained by identifying each chain will always have density $\Omega(n/\mu q)\in\omega(1)$.  The issue is that, unless the chains are separated, this this step of identifying each chain doesn't allow us to relate the queue number of the contracted graph to the queue number of $G$.
+
+It seems like it would also be helpful to have a rootish upper bound on $\lambda$ and $\mu$.  It might be a good idea to have a look at the \htmladdnormallink{Greene-Kleitman Theorem}{https://jlmartin.ku.edu/courses/math796-S08/notes0402.pdf}:
+
+Consider the greedy partition into chains $V_1,\ldots,V_\mu$ where $V_i$ is the longest chain in the poset $(\prec,V(G)\setminus\bigcup_{j=1}^{i-1} V_j)$ and let $\lambda_i = |V_i|$.  Dually, there is the greedy partition into antichains $A_1,\ldots,A_{\lambda}$ where $A_i$ is the largest antichain in the poset $(\prec,V(G)\setminus\bigcup_{j=1}^{i-1}A_j)$.  The Greene-Kleitman Theorem tells us that
+\[
+    \mu_i = |\{j:\lambda_j \ge i\}| \mbox{ and }
+    \lambda_j = |\{ i: \mu_i\ge \j\} \enspace .
+\]
+
+
+
+
+
+
+
+
+
+% \begin{lem}
+%   The partial order $(\prec,V(G))$ does not contain any chain of size greater than $(k+1)8qd/\epsilon$.
+% \end{lem}
+%
+% \begin{proof}
+%   Suppose that $V_0\subseteq V(G)$ is a chain of size $r$.  By same argument used in the proof of \label{few_edges_between_sets}, $e(V_0,V_0)) \le 8qd$.  For each $i\in\{1,\ldots,k\}$, $e(V_0,V_i)\le 8qd$.  Thus, the total number of edges with at least one endpoint in $V_0$ is  $e(V_0)\le (k+1)8qd$.
+%
+%   On the other hand, by Property~(ii) of expanders, $e(V_0, V(G)\setminus V_0)\ge \epsilon r$,\todo{Handle $k> n/2$} so $\epsilon r \le (k+1)8qd$ and dividing by $\epsilon$ establishes the result.
+% \end{proof}
+
+
+
+
+
+
+
+
+
+
 % \begin{clm}
 %   For infinitely many values of $n$, $\qn(Q_{n,r})\ge f(n)$.
 % \end{clm}

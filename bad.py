@@ -220,6 +220,7 @@ if __name__ == "__main__":
     print("n = {}".format(len(a)))
     s = lis(a)
     print("LIS has length {}".format(len(lis(a))))
+    print(s)
     # r = 2**d
     # c = contiguous_lis(a, r)
     # print("Longest {}-contiguous IS has length {}".format(r, len(c)))
