@@ -120,7 +120,7 @@
 
 Let $d$ and $n$, be positive integers, $n$ a multiple of $4$, and let $\epsilon>0$. A  \emph{$d$-monotone $\epsilon$-expander of order $n$} is a bipartite graph $G$ with vertex set $V(G):=\{1,\ldots,2n\}$ and parts $A:=\{1,\ldots,n\}$ and $B:=\{n+1,\ldots,2n\}$ with the following properties:
 \begin{compactenum}[(i)]
-  \item ($d$-monotone): The edges of $G$ can be partitioned into $d$ $M_1,\ldots,M_d$ such that, for any $i\in\{1,\ldots,d\}$ and any two edges $vw,xy\in M_i$, with $v,x\in A$ and $w,y\in B$, $v < x$ if and only if $w < y$.
+  \item ($d$-monotone): The edges of $G$ can be partitioned into $d$ matchings $M_1,\ldots,M_d$ such that, for any $i\in\{1,\ldots,d\}$ and any two edges $vw,xy\in M_i$, with $v,x\in A$ and $w,y\in B$, $v < x$ if and only if $w < y$.
   \item ($\epsilon$-expander): For any $S\subseteq\{1,\ldots,n\}$ with $|S|\le 3n/4$, $|N_G(S)|\ge (1+\epsilon)|S|$.
 \end{compactenum}
 
@@ -176,7 +176,7 @@ Using \cref{bourgain}, we construct the following $(2r+1)n$-vertex graph $X_{n,r
   since $r\ge \log(n/k)/\log(1+\epsilon/2)$.
 \end{proof}
 
-\begin{lem}\label{menger}
+\begin{lem}\label{one_path}
   Let $\epsilon, d, k, x, r, n$ and $\overline{V}$ be as in \cref{expansion} with the additional restriction that $r\ge\log(n/k)/\log(1+\epsilon/2)$. Let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then $X_{n,r}-\overline{V}$ contains a path $P$ of length $2r$ and with one endpoint in $V_0$ and one endpoint in $V_{2r}$.
 \end{lem}
 
@@ -186,15 +186,15 @@ Using \cref{bourgain}, we construct the following $(2r+1)n$-vertex graph $X_{n,r
 \end{proof}
 
 \begin{lem}\label{large_flow}
-  Let $\epsilon, d, k, r, n$ be as in \cref{menger} and let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then $X_{n,r}$ contains $t:= \lfloor \epsilon k / (2+\epsilon)\rfloor$ vertex-disjoint paths $P_1,\ldots,P_{t}$ each of length $2r$ and each having an endpoint in $S$ and an endpoint in $T$.
+  Let $\epsilon, d, k, r, n$ be as in \cref{one_path} and let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then $X_{n,r}$ contains $t:= \lfloor \epsilon k / (2+\epsilon)\rfloor$ vertex-disjoint paths $P_1,\ldots,P_{t}$ each of length $2r$ and each having an endpoint in $S$ and an endpoint in $T$.
 \end{lem}
 
 \begin{proof}
-  For each $\ell:=1,\ldots,t$ apply \cref{menger} with $\overline{V}:=\bigcup_{a=1}^{\ell-1} V(P_a)$ to find a path $P_\ell$ that is vertex-disjoint from $P_{1},\ldots,P_{\ell-1}$.  This works because $|\overline{V}\cap V_i|\le t$ which satisfies the requirements placed on $x:=t$ in the application of \cref{meet_in_middle}.
+  For each $\ell:=1,\ldots,t$ apply \cref{one_path} with $\overline{V}:=\bigcup_{a=1}^{\ell-1} V(P_a)$ to find a path $P_\ell$ that is vertex-disjoint from $P_{1},\ldots,P_{\ell-1}$.  This works because $|\overline{V}\cap V_i|\le t$ which satisfies the requirements placed on $x:=t$ in the application of \cref{one_path}.
 \end{proof}
 
 \begin{lem}\label{large_crossing_flow}
-  Let $\epsilon, d, k, r, n$ be as in \cref{menger} and such that $p:=n/k$ is an integer and $p\le \epsilon k/(2+\epsilon)$. Let $S_1,\ldots,S_p\subseteq V_0$ and $T_1\ldots,T_p\subseteq V_{2r}$ each be $k$-element sets.  Then there exists $p$ vertex-disjoint paths $P_1,\ldots,P_{p}$ each of length $2r$ such that, for each $\ell\in\{1,\ldots,p\}$, $P_i$ has an endpoint in each of $S_i$ and $T_i$.
+  Let $\epsilon, d, k, r, n$ be as in \cref{one_path} and such that $p:=n/k$ is an integer and $p\le \epsilon k/(2+\epsilon)$. Let $S_1,\ldots,S_p\subseteq V_0$ and $T_1\ldots,T_p\subseteq V_{2r}$ each be $k$-element sets.  Then there exists $p$ vertex-disjoint paths $P_1,\ldots,P_{p}$ each of length $2r$ such that, for each $\ell\in\{1,\ldots,p\}$, $P_i$ has an endpoint in each of $S_i$ and $T_i$.
 \end{lem}
 
 \begin{proof}
@@ -203,11 +203,11 @@ Using \cref{bourgain}, we construct the following $(2r+1)n$-vertex graph $X_{n,r
 
 
 \begin{lem}\label{large_ordered_flow}
-  Let $\epsilon, d, k, r, n$ be as in \cref{menger} and let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then there exists $t:= \lfloor \epsilon k / (2+\epsilon)d^{2r}\rfloor$ vertex-disjoint paths $P_1,\ldots,P_{t}$, where, for each $\ell\in\{1,\ldots,t\}$, $P_\ell$ has endpoints $v_{0,a_\ell}$ and ends at $v_{2r,b_\ell}$ and, for each $\ell,\ell'\in\{1,\ldots,t\}$, $a_\ell < a_{\ell'}$ if and only if $b_\ell < b_\ell'$.
+  Let $\epsilon, d, k, r, n$ be as in \cref{one_path} and let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then there exists $t:= \lfloor \epsilon k / (2+\epsilon)/d^{2r}\rfloor$ vertex-disjoint paths $P_1,\ldots,P_{t}$, where, for each $\ell\in\{1,\ldots,t\}$, $P_\ell$ has endpoints $v_{0,a_\ell}$ and $v_{2r,b_\ell}$ and, for each $\ell,\ell'\in\{1,\ldots,t\}$, $a_\ell < a_{\ell'}$ if and only if $b_\ell < b_\ell'$.
 \end{lem}
 
 \begin{proof}
-  Apply \cref{menger} and then partition the resulting set of paths into $d^{2r}$ sets, each of which is \emph{non-crossing}.  The largest of these subsets gives the result.
+  Apply \cref{large_flow} and then partition the resulting set of paths into $d^{2r}$ sets, each of which is \emph{non-crossing}.  The largest of these subsets gives the result.
 \end{proof}
 
 
@@ -304,7 +304,7 @@ Define the partial order $(\prec,V(G))$ in which $v\prec w$ if and only if $v < 
 \end{lem}
 
 \begin{proof}
-  Suppose, for the sake of contradiction, that $G$ contains $r > 8qd$ edges each having one endpoint in each of $A$ and $B$.  Without loss of generality, we may assume that at least $r/2$ of these edges have their first endpoint in $A$ and their second endpoint in $B$.\footnote{Recall that we treat edges of $G$ as ordered pairs whose order is determined by the corresponding edge in the bipartite graph $X$.}  By the pigeonhole principle at $r/4d>2q$ of these edges are assigned to a common stack, $\alpha$, of $\mathcal{S}$.  That is, $G$ contains a set of edges $M:=\{v_iw_i:i\in\{1,\ldots,v_{2q+1}\}\}$ such that $\varphi(v_iw_i)=\alpha$ for each $i\in\{1,\ldots,2q+1\}$.  Since all these edges are assigned to stack $\alpha$, the edges of $M$ are pairwise nesting with respect to $<$, so $v_1<\cdots<v_{2q+1} < w_{2q+1}<\cdots<w_1$.  Since each of $A$ and $B$ are chains with respect to $\prec$, this implies that $v_1<'\cdots<'v_{2q+1}$ and that $w_{2q+1}<'\cdots<'w_{1}$.  But this  contradicts the assumption that $\mathcal{Q}$ is a $q$-queue layout.\todo{Justify this.}
+  Suppose, for the sake of contradiction, that $G$ contains $r > 8qd$ edges each having one endpoint in each of $A$ and $B$.  Without loss of generality, we may assume that at least $r/2$ of these edges have their first endpoint in $A$ and their second endpoint in $B$.\footnote{Recall that we treat edges of $G$ as ordered pairs whose order is determined by the corresponding edge in the bipartite graph $X$.}  By the Pigeonhole Principle at least $r/4d>2q$ of these edges are assigned to a common stack, $\alpha$, of $\mathcal{S}$.  That is, $G$ contains a set of edges $M:=\{v_iw_i:i\in\{1,\ldots,v_{2q+1}\}\}$ such that $\varphi(v_iw_i)=\alpha$ for each $i\in\{1,\ldots,2q+1\}$.  Since all these edges are assigned to stack $\alpha$, the edges of $M$ are pairwise nesting with respect to $<$, so $v_1<\cdots<v_{2q+1} < w_{2q+1}<\cdots<w_1$.  Since each of $A$ and $B$ are chains with respect to $\prec$, this implies that $v_1<'\cdots<'v_{2q+1}$ and that $w_{2q+1}<'\cdots<'w_{1}$.  But this  contradicts the assumption that $\mathcal{Q}$ is a $q$-queue layout.\todo{Justify this.}
 \end{proof}
 
 
