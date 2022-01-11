@@ -177,7 +177,7 @@ Using \cref{bourgain}, we construct the following $(2r+1)n$-vertex graph $X_{n,r
 \end{proof}
 
 \begin{lem}\label{one_path}
-  Let $\epsilon, d, k, x, r, n$ and $\overline{V}$ be as in \cref{expansion} with the additional restriction that $r\ge\log(n/k)/\log(1+\epsilon/2)$. Let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be $k$-element sets.  Then $X_{n,r}-\overline{V}$ contains a path $P$ of length $2r$ and with one endpoint in $V_0$ and one endpoint in $V_{2r}$.
+  Let $\epsilon, d, k, x, r, n$ and $\overline{V}$ be as in \cref{expansion} with the additional restriction that $r\ge\log(n/k)/\log(1+\epsilon/2)$. Let $S\subseteq V_0$ and $T\subseteq V_{2r}$ each be pairwise-disjoint $k$-element sets.  Then $X_{n,r}-\overline{V}$ contains a path $P$ of length $2r$ and with one endpoint in $V_0$ and one endpoint in $V_{2r}$.
 \end{lem}
 
 \begin{proof}
@@ -262,6 +262,19 @@ Define the graph $Q_n$ as follows:
 
 
 \todo[inline]{We are still missing an ingredient to make all of this work.  We need to construct some auxilliary graph on $v_{0,1},\ldots,v_{0,n}$ that places some restrictions on the ordering of $v_{0,1},\ldots,v_{0,n}$.  Keep reading.}
+
+\todo[inline]{\textbf{Update:} Andrew Suk and Ji Zheng have provided the missing ingredient!}
+
+A sequence $S:=(a_1,\ldots,a_{st})$ of $st$ distinct real numbers is  an \emph{$(s,t)$-block increasing sequence} if, for each $(i_1,\ldots,i_s)\in\{1,\ldots,t\}^s$, $a_{i_1} < a_{t+i_2} < a_{2t+i_3} <\cdots < a_{(s-1)t+i_s}$.  An \emph{$(s,t)$-block decreasing sequence} is defined similarly by using $<$ in place of $>$.  Each $(s,t)$-block-increasing sequence and each $(s,t)$-block-decreasing sequence is an \emph{$(s,t)$-block-monotone} sequence.
+
+\begin{thm}[Suk and Zheng 2021] There exists $\alpha >0$ such that, for any positive integers $s$ and $n>(k-1)^2$, every sequence of $n$ distinct real numbers contains an $(s,\lceil\alpha n/s^2\rceil)$-block-monotone subsequence.
+\end{thm}
+
+We will use this result to define subsets of $V_{0}$ whose ordering either agrees or disa,\ldots,n}$
+
+
+$S$ is \emph{$(s,t)$-block decreasing} if it satisfies the same condition with $<$ replaced by $>$ and $S$ is \emph{depth-$s$ $t$-block-monotone} if it is $t$-block-increasing or $t$-block-decreasing.  We say that $T$
+
 
 In particular, it would be enough to find a graph that guarantees a sequence $i_1<\cdots<i_s$ of length $s\ge  n^\epsilon$ (\emph{long}) with $i_s-i_1 \le n^{\epsilon+o(1)}$ (\emph{dense}) such that $v_{0,i_1}<\cdots<v_{0,i_s}$ or $v_{0,i_1}>\cdots>v_{0,i_s}$ (\emph{monotone}). Then, by attaching separate copies of $Q_{n^{\epsilon},r}$ (for appropriately chosen $r$) to consecutive vertices we could then prove the existence of a big rainbow using \cref{large_ordered_flow}. Even if we can't guarantee this, it would be enough to guarantee it at some ``scale'' (where we divide indices by $2^p$ for some $p\in \{0,\ldots,\log n- O(\log\log n)\}$.
 
